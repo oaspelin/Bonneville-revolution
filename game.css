@@ -1,0 +1,16 @@
+html{
+	height: 100%;
+}
+body{
+	height: 100%;
+}
+
+canvas {
+  	border: 2px solid #9E000F;
+}
+
+#canvasdiv{
+	padding-top: 15px;
+	margin:0 auto;
+	width:800px;
+}
