@@ -14,8 +14,8 @@ function initCanvas() {
   canvas.height = 480;
 
   var contextIsSupported = context !== null;
-  listenToMouse();
-  runGame();
+  var images=loadImages();
+  runGame(images);
 }
 
 function listenToMouse(){
