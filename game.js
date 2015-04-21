@@ -15,4 +15,22 @@ function initCanvas() {
 
   var contextIsSupported = context !== null;
   loadGraphics();
+  listenToMouse();
+}
+
+function listenToMouse(){
+	document.addEventListener("mousedown",function(e){
+	    var pos=getMousePos(e);
+	    console.log(pos);
+	});
+
+	function getMousePos(event) {
+	    var rect = canvas.getBoundingClientRect();
+	    x = event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+	    y = event.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+	    return {
+	        X: x - rect.left,
+	        Y: y - rect.top
+	    };
+	}
 }
