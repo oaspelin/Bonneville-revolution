@@ -1,0 +1,42 @@
+-Question luokka
+	-Kysymys
+	-vastaukset
+	-oikea vastaus
+	-kuva
+	-vaikeustaso
+
+-Questionit listaan
+	
+
+-Pelilogiikka
+	-Kysymykset
+		-Neljä vaikeita
+		-Neljä helppoa
+		-Neljä keskivaikeita
+	-Jos vastaa väärin => Game over
+	-Oikea vastaus => peli jatkuu
+	-Pisteet
+		-Helppo 1p
+		-Keskivaikea 2p
+		-Vaikea 3p
+	-Max 30 sek/kysymys
+
+-Aloitusruutu / Menu
+	-Tietoa pelistä
+		-Säännöt
+		-Arvonta
+			-Kymmenen parhaat voittaa matkan, tehdasvierailu ja moottoripyörä safaari euroopassa
+	-Highscores
+		-JSON
+	-Jos osataan
+		-Gif /video
+
+-Lopetusruutu
+	-Jos häviää => highscores ja oma score
+	-Jos voittaa ohjelma kysyy yhteystiedot
+		-email & puh. nmr.
+
+-Canvas library createjs.com EaselJS
+
+-Värimaailma
+
