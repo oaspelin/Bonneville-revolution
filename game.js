@@ -10,8 +10,8 @@ function initCanvas() {
   canvas = document.querySelector("canvas");
   context = canvas.getContext( "2d" );
   
-  canvas.width = 800;
-  canvas.height = 500;
+  canvas.width = 720;
+  canvas.height = 480;
 
   var contextIsSupported = context !== null;
   loadGraphics();

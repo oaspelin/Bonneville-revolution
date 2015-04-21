@@ -1,4 +1,5 @@
 function loadGraphics() {
+	drawStatusBar();
 	drawQuestionbox();
 	drawAnswerboxes();
 	drawPhase();
@@ -19,5 +20,18 @@ function drawAnswerboxes(){
 
 function drawPhase(){
 	context.font = "bold 30px 'Electrolize'";
-	context.fillText("1/10",620,40);
+	context.fillStyle="black";
+	context.fillText("1/10",610,40);
+}
+
+function drawStatusBar(){
+	drawBar();
+	context.rect(60,15,360,30);
+	context.stroke();
+}
+
+function drawBar(){
+	context.rect(60,16,300,28);
+	context.fillStyle= "green";
+	context.fill();
 }
