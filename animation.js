@@ -1,4 +1,5 @@
 function loadGraphics() {
+	loadImages();
 	drawStatusBar();
 	drawQuestionbox();
 	drawAnswerboxes();
@@ -34,4 +35,9 @@ function drawBar(){
 	context.rect(60,16,300,28);
 	context.fillStyle= "green";
 	context.fill();
+}
+function loadImages(){
+	var backgroundImage1 = new Image();
+  	backgroundImage1.src = 'mopojengi.png';
+  	context.drawImage(backgroundImage1,0,0,720,480);
 }
