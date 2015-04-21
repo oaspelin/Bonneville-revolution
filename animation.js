@@ -1,22 +1,22 @@
 function loadGraphics() {
 	loadImages();
 	drawStatusBar();
-	drawQuestionbox();
-	drawAnswerboxes();
+	drawBoxes();
 	drawPhase();
-}
 
-function drawQuestionbox(){
-	context.rect(60,60,600,160);
+
+function drawBoxes(){
+	context.fillStyle= "rgba(255, 255, 255, 0.7)";
+	context.fillRect(60,60,600,160);
+	drawAnswerboxes();
 	context.stroke();
 }
 
 function drawAnswerboxes(){
-	context.rect(60,240,290,100);
-	context.rect(370,240,290,100);
-	context.rect(60,360,290,100);
-	context.rect(370,360,290,100);
-	context.stroke();
+	context.fillRect(60,240,290,100);
+	context.fillRect(370,240,290,100);
+	context.fillRect(60,360,290,100);
+	context.fillRect(370,360,290,100);
 }
 
 function drawPhase(){
@@ -32,12 +32,12 @@ function drawStatusBar(){
 }
 
 function drawBar(){
-	context.rect(60,16,300,28);
 	context.fillStyle= "green";
-	context.fill();
+	context.fillRect(60,16,300,28);
 }
 function loadImages(){
 	var backgroundImage1 = new Image();
-  	backgroundImage1.src = 'mopojengi.png';
+  	backgroundImage1.src = 'images/mopojengi.png';
   	context.drawImage(backgroundImage1,0,0,720,480);
+}
 }
