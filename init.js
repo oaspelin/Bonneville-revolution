@@ -14,7 +14,11 @@ function initCanvas() {
   canvas.height = 480;
 
   var contextIsSupported = context !== null;
+
+  //loads the background Images
   var images=loadImages();
+
+  //starts the game
   runGame(images);
 }
 
@@ -23,7 +27,7 @@ function listenToMouse(){
 	    var pos=getMousePos(e);
 	    console.log(pos);
 	});
-
+	//converts the page coordinates to canvas coordinates
 	function getMousePos(event) {
 	    var rect = canvas.getBoundingClientRect();
 	    x = event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
