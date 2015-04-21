@@ -47,8 +47,8 @@ function loadGraphics(time,backgroundImage1) {
 		if((adjustedTime>180) && (adjustedTime<270)){ context.fillStyle="#CCCC00";}
 		if((adjustedTime>270) && (adjustedTime<360)){ context.fillStyle="#CC0000";}
 		
-		if(adjustedTime<369){
-		context.fillRect(60,16,360-time/100,28);
+		if(adjustedTime<360){
+			context.fillRect(60,16,360-time/100,28);
 		}
 	}
 	//draws the backgroundImage
