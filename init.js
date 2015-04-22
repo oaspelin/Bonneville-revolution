@@ -27,6 +27,7 @@ function listenToMouse(){
 	    var pos=getMousePos(e);
 	    console.log(pos);
 	});
+
 	//converts the page coordinates to canvas coordinates
 	function getMousePos(event) {
 	    var rect = canvas.getBoundingClientRect();

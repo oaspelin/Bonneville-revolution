@@ -1,7 +1,6 @@
 
 //this function needs additional parameters when we progress EG. what question, also it should take as parameter an array of images
 function loadGraphics(time,backgroundImage1) {
-
 	//calls the functions for rendering the game
 	drawBackground();
 	drawBoxes();
