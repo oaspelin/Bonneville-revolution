@@ -4,30 +4,46 @@ function loadGraphics(time,backgroundImage1) {
 
 	//calls the functions for rendering the game
 	drawBackground();
-	drawStatusBar();
 	drawBoxes();
+	drawStatusBar();
 	drawPhase();
 	
 	function drawBoxes(){
-		//opacity
-		context.fillStyle= "rgba(255, 255, 255, 0.7)";
-		context.fillRect(60,60,600,160);
+		//questionBox
+		drawRoundRect(60,60,600,160,10);
 		drawAnswerboxes();
-		context.stroke();
 	}
 
 	//draws the small boxes containing the answers
 	function drawAnswerboxes(){
-		context.fillRect(60,240,290,100);
-		context.fillRect(370,240,290,100);
-		context.fillRect(60,360,290,100);
-		context.fillRect(370,360,290,100);
+		drawRoundRect(60,240,290,100,10);
+		drawRoundRect(370,240,290,100,10);
+		drawRoundRect(60,360,290,100,10);
+		drawRoundRect(370,360,290,100,10);
+	}
+
+	function drawRoundRect(x, y, width, height, cornerRadius){
+		context.beginPath();
+		context.moveTo(x+cornerRadius,y);
+		context.lineTo(x+width-cornerRadius, y);
+		context.arcTo(x+width,y,x+width,y+cornerRadius, cornerRadius);
+		context.lineTo(x+width,y+height-cornerRadius);
+		context.arcTo(x+width, y+height,x+width-cornerRadius, y+height, cornerRadius);
+		context.lineTo(x+cornerRadius,y+height);
+		context.arcTo(x, y+height, x, y+height-cornerRadius, cornerRadius);
+		context.lineTo(x, y+cornerRadius);
+		context.arcTo(x, y, x+cornerRadius,y, cornerRadius);
+		//opacity
+		context.fillStyle= "rgba(255, 255, 255, 0.7)";
+		context.stroke();
+		context.fill();
+		context.closePath();	
 	}
 
 	//what question EG. 1/12
 	function drawPhase(){
 		context.font = "bold 30px 'Electrolize'";
-		context.fillStyle="black";
+		context.fillStyle="white";
 		context.fillText("1/10",610,40);
 	}
 
@@ -35,7 +51,7 @@ function loadGraphics(time,backgroundImage1) {
 	function drawStatusBar(){
 		drawBar();
 		context.rect(60,15,360,30);
-		context.stroke();
+		//context.stroke();
 	}
 
 	function drawBar(){
