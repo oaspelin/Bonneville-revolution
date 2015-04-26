@@ -22,7 +22,7 @@ var Question11 = {Kysymys:"Mistä materiaalista Bonneville Revolutionin runko on
 
 var Question12 = {Kysymys:"Kuinka monta hevosvoimaa oli ensimmäisessä oikeassa Triumph moottoripyörässä?", A:"kolme", B:"yksi", C:"kaksi", D:"viisi", vaikeusaste:3, kuva: "images/Tuunausmopo.jpg"};
 
-var Question13 = {Kysymys:"Triumphin moottoripyörät kootaan Englannissa Hincleyssä, mutta osat valmistetaan enimmäkseen", A:"Thaimaassa", B:"Kiinassa", C:"Saksassa", D:"Japanissa", vaikeusaste:"Helppo", kuva: "images/factory2.jpg"};
+var Question13 = {Kysymys:"Triumphin moottoripyörät kootaan Englannissa Hincleyssä, mutta osat valmistetaan enimmäkseen", A:"Thaimaassa", B:"Kiinassa", C:"Saksassa", D:"Japanissa", vaikeusaste:3, kuva: "images/factory2.jpg"};
 
 var Question14 = {Kysymys:"Kuinka monta ihmistä voi ajaa Bonneville Revolution parvessa turvallisesti?", A:"16", B:"3", C:"6", D:"10", vaikeusaste:3, kuva: "images/mopojengi.jpg"};
 
@@ -34,5 +34,23 @@ var Question16 = {Kysymys:"Moni tunnettu supertähti esiintyi Triumphin mainoksi
 var Questions=[Question1, Question2, Question3, Question4, Question5, Question6, Question7, Question8, Question9, Question10, Question11, Question12, Question13, Question14, Question15, Question16];
 
 function generateQuestions(){
-	return Questions.slice(0,12);
+	
+	var elementsremoved=0;
+	//removes one random easy question from the array
+	var random=Math.round(Math.random()*(5-0)+0);
+	Questions.splice(random,1);
+	elementsremoved++;
+
+	//removes two random moderate questions from the array
+	for(i=0; i<2;i++){
+		random=Math.round(Math.random()*((10-elementsremoved)-(5-elementsremoved))+(5-elementsremoved));
+		Questions.splice(random,1);
+		elementsremoved++;
+	}
+
+	//removes one random hard quesstion from the array
+	random=Math.round(Math.random()*((15-elementsremoved)-(11-elementsremoved))+(11-elementsremoved));
+	Questions.splice(random,1);
+
+	return Questions;
 }

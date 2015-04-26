@@ -4,37 +4,61 @@ function runGame(backgroundImage1,questions){
 	listenToMouse();
 	var currentquestion;
 	var questionIndex=0;
+	var timer= Date.now();
+	var delta;
+	
+	//needed for the timer bar
+	function updateDelta() {
+    	var now = Date.now();
+    	delta=now-timer;
+  	}
 
 	requestAnimationFrame(gameLoop);
 
 	function updateGameState(){
-		currentquestion=questions[questionIndex];
+		updateDelta();
+		currentquestion=questions[Math.min(questionIndex,11)];
 	}
 
 	function gameLoop(time) {
 		updateGameState();
-    	loadGraphics(time,backgroundImage1,currentquestion);
+    	loadGraphics(delta,backgroundImage1,currentquestion,Math.min(questionIndex+1,12));
     	requestAnimationFrame(gameLoop);
   	}
 
   	function listenToMouse(){
-	document.addEventListener("mousedown",function(e){
-	    var pos=getMousePos(e);
-	    if((pos.X>60 && pos.X<300) && (pos.Y>240 && pos.Y<340)){
-			questionIndex++;
-		}
+		document.addEventListener("mousedown",function(e){
+		    var pos=getMousePos(e);
+		    //upper right box
+		    if((pos.X>60 && pos.X<300) && (pos.Y>240 && pos.Y<340)){
+				questionIndex++;
+				timer=Date.now();
+			}
+			//upper left
+			if((pos.X>370 && pos.X<540) && (pos.Y>240 && pos.Y<340)){
+				questionIndex++;
+				timer=Date.now();
+			}
+			//down right
+			if((pos.X>60 && pos.X<300) && (pos.Y>360 && pos.Y<460)){
+				questionIndex++;
+				timer=Date.now();
+			}
+			//down left
+		    if((pos.X>370 && pos.X<540) && (pos.Y>360 && pos.Y<460)){
+				questionIndex++;
+				timer=Date.now();
+			}			
 	});
-
-	//converts the page coordinates to canvas coordinates
-	function getMousePos(event) {
-	    var rect = canvas.getBoundingClientRect();
-	    x = event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
-	    y = event.clientY + document.body.scrollTop + document.documentElement.scrollTop;
-	    return {
-	        X: x - rect.left,
-	        Y: y - rect.top
-	    };
+		//converts the page coordinates to canvas coordinates
+		function getMousePos(event) {
+		    var rect = canvas.getBoundingClientRect();
+		    x = event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+		    y = event.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+		    return {
+		        X: x - rect.left,
+		        Y: y - rect.top
+		    };
+		}
 	}
-}
-
 }

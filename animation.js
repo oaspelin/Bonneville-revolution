@@ -1,13 +1,19 @@
 
 //this function needs additional parameters when we progress EG. what question, also it should take as parameter an array of images
-function loadGraphics(time,backgroundImage1,question) {
+function loadGraphics(timer,backgroundImage1,question,questionNumber) {
 	//calls the functions for rendering the game
+	clearCanvas();
 	drawBackground();
 	drawBoxes();
 	drawStatusBar();
 	drawPhase();
 	drawText();
 
+	function clearCanvas() {
+    	context.clearRect(0, 0, 720, 480); // clear canvas
+  	}
+
+	//text to boxes
 	function drawText(){
 		context.font = "bold 30px 'Electrolize'";
 		context.fillStyle="black";
@@ -55,7 +61,7 @@ function loadGraphics(time,backgroundImage1,question) {
 	function drawPhase(){
 		context.font = "bold 30px 'Electrolize'";
 		context.fillStyle="white";
-		context.fillText("1/10",610,40);
+		context.fillText(questionNumber+"/12",610,40);
 	}
 
 	//encapsulates the time-left bar
@@ -67,7 +73,7 @@ function loadGraphics(time,backgroundImage1,question) {
 
 	function drawBar(){
 		//time in seconds
-		var adjustedTime=time/100;
+		var adjustedTime=timer/100;
 		//depending on the time left different color on bar
 		if(adjustedTime<90){ context.fillStyle="#00CC00";}
 		if((adjustedTime>90) && (adjustedTime<180)){ context.fillStyle="#66CC00";}
@@ -75,7 +81,7 @@ function loadGraphics(time,backgroundImage1,question) {
 		if((adjustedTime>270) && (adjustedTime<360)){ context.fillStyle="#CC0000";}
 		
 		if(adjustedTime<360){
-			context.fillRect(60,16,360-time/100,28);
+			context.fillRect(60,16,360-timer/100,28);
 		}
 	}
 	//draws the backgroundImage
