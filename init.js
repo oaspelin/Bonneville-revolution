@@ -15,6 +15,7 @@ function initCanvas() {
 
   var contextIsSupported = context !== null;
 
+
   //loads the background Images
   var images=loadImages();
   var questions=generateQuestions();

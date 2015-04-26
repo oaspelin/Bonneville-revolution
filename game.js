@@ -1,4 +1,4 @@
-function runGame(backgroundImage1,questions){
+function runGame(images,questions){
 
 	//reacts on mouseclicks
 	listenToMouse();
@@ -6,6 +6,9 @@ function runGame(backgroundImage1,questions){
 	var questionIndex=0;
 	var timer= Date.now();
 	var delta;
+
+	var gamestate={Name:"menu", count:0};
+	
 	
 	//needed for the timer bar
 	function updateDelta() {
@@ -16,13 +19,14 @@ function runGame(backgroundImage1,questions){
 	requestAnimationFrame(gameLoop);
 
 	function updateGameState(){
+		gamestate.count++;
 		updateDelta();
 		currentquestion=questions[Math.min(questionIndex,11)];
 	}
 
 	function gameLoop(time) {
 		updateGameState();
-    	loadGraphics(delta,backgroundImage1,currentquestion,Math.min(questionIndex+1,12));
+    	loadGraphics(delta,images,currentquestion,Math.min(questionIndex+1,12), gamestate);
     	requestAnimationFrame(gameLoop);
   	}
 

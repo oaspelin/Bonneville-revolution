@@ -1,13 +1,27 @@
 
 //this function needs additional parameters when we progress EG. what question, also it should take as parameter an array of images
-function loadGraphics(timer,backgroundImage1,question,questionNumber) {
+function loadGraphics(timer,images,question,questionNumber, gamestate) {
 	//calls the functions for rendering the game
 	clearCanvas();
-	drawBackground();
-	drawBoxes();
-	drawStatusBar();
-	drawPhase();
-	drawText();
+
+	if(gamestate=="game"){
+		drawBackground();
+		drawBoxes();
+		drawStatusBar();
+		drawPhase();
+		drawText();
+	}
+
+	if(gamestate.Name=="menu"){
+
+		context.drawImage(images[1], gamestate.count*500,0, 500,333, 0, 0, 720,480);
+		if(gamestate.count>4){
+			gamestate.count=0;
+			}
+		else{
+			gamestate.count++;
+		}
+	}
 
 	function clearCanvas() {
     	context.clearRect(0, 0, 720, 480); // clear canvas
@@ -86,14 +100,19 @@ function loadGraphics(timer,backgroundImage1,question,questionNumber) {
 	}
 	//draws the backgroundImage
 	function drawBackground(){
-		context.drawImage(backgroundImage1,0,0,720,480);
+		context.drawImage(images[0],0,0,720,480);
 	}
-
 }
 
 //loads the images (only once)
 function loadImages(){
-		var backgroundImage1 = new Image();
-	  	backgroundImage1.src = 'images/mopojengi.png';
-	  	return backgroundImage1;
+	var images=[];
+	var backgroundImage1 = new Image();
+	backgroundImage1.src = 'images/mopojengi.png';
+	images.push(backgroundImage1);
+	var gifImage= new Image();
+	gifImage.src= 'images/GIFtest.png';
+	images.push(gifImage);
+
+	return images;
 }
