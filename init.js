@@ -17,9 +17,10 @@ function initCanvas() {
 
   //loads the background Images
   var images=loadImages();
+  var questions=generateQuestions();
 
   //starts the game
-  runGame(images);
+  runGame(images,questions);
 }
 
 function listenToMouse(){

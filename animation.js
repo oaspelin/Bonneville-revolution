@@ -1,11 +1,23 @@
 
 //this function needs additional parameters when we progress EG. what question, also it should take as parameter an array of images
-function loadGraphics(time,backgroundImage1) {
+function loadGraphics(time,backgroundImage1,question) {
 	//calls the functions for rendering the game
 	drawBackground();
 	drawBoxes();
 	drawStatusBar();
 	drawPhase();
+	drawText();
+
+	function drawText(){
+		context.font = "bold 30px 'Electrolize'";
+		context.fillStyle="black";
+		context.textAlign="center";
+		context.fillText(question.Kysymys,360,150);
+		context.fillText(question.A,205,290);
+		context.fillText(question.B,515,290);
+		context.fillText(question.C,205,410);
+		context.fillText(question.D,515,410);
+	}
 	
 	function drawBoxes(){
 		//questionBox

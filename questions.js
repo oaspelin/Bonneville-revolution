@@ -1,4 +1,4 @@
-var Question1 = {Kysymys:"Mitä “Triumph” tarkoittaa suomeksi?", A:"Voittoa", B:"Vauhtia", C:"Elämystä", D:"Vapautta", vaikeusaste:1 kuva:"images/ajaja.jpg"};
+var Question1 = {Kysymys:"Mitä “Triumph” tarkoittaa suomeksi?", A:"Voittoa", B:"Vauhtia", C:"Elämystä", D:"Vapautta", vaikeusaste:1, kuva:"images/ajaja.jpg"};
 
 var Question2 = {Kysymys:"Missä maassa Triumphin moottoripyörät on perinteisesti valmistettu? ", A:"Iso-Britanniassa", B:"Ranskassa", C:"Saksassa", D:"Yhdysvalloissa", vaikeusaste:1, kuva: "images/factory1.jpg"};
 
@@ -22,14 +22,17 @@ var Question11 = {Kysymys:"Mistä materiaalista Bonneville Revolutionin runko on
 
 var Question12 = {Kysymys:"Kuinka monta hevosvoimaa oli ensimmäisessä oikeassa Triumph moottoripyörässä?", A:"kolme", B:"yksi", C:"kaksi", D:"viisi", vaikeusaste:3, kuva: "images/Tuunausmopo.jpg"};
 
-var Question13 = {Kysymys:"Triumphin moottoripyörät kootaan Englannissa Hincleyssä, mutta osat valmistetaan enimmäkseen", A:"Thaimaassa", B:"Kiinassa", C:"Saksassa", D:"Japanissa", vaikeusaste:"Helppo" kuva: "images/factory2.jpg"};
+var Question13 = {Kysymys:"Triumphin moottoripyörät kootaan Englannissa Hincleyssä, mutta osat valmistetaan enimmäkseen", A:"Thaimaassa", B:"Kiinassa", C:"Saksassa", D:"Japanissa", vaikeusaste:"Helppo", kuva: "images/factory2.jpg"};
 
 var Question14 = {Kysymys:"Kuinka monta ihmistä voi ajaa Bonneville Revolution parvessa turvallisesti?", A:"16", B:"3", C:"6", D:"10", vaikeusaste:3, kuva: "images/mopojengi.jpg"};
 
 var Question15 = {Kysymys:"Mihin tekniikoihin perustuu Bonneville Revolutionin ohjauksesta huolehtiva parviäly?", A:"Ultraääni ja GPS", B:"Infrapuna ja 5G", C:"Laser ja RS8", D:"Röntgensäteet ja SCK", vaikeusaste:3, kuva: "niityllä.jpg"};
 
-var Question16 = {Kysymys:"Moni tunnettu supertähti esiintyi Triumphin mainoksissa 1950-luvulla. Kuka seuraavista henkilöistä ei ole esiintynyt Triumphin mainoksissa?", A:"Sean Connery", B:"Elvis Presley", C:"Steve McQueen", D:"James Dean", vaikeusaste:3, kuva: "images/hipster
-.jpg"};
+var Question16 = {Kysymys:"Moni tunnettu supertähti esiintyi Triumphin mainoksissa 1950-luvulla. Kuka seuraavista henkilöistä ei ole esiintynyt Triumphin mainoksissa?", A:"Sean Connery", B:"Elvis Presley", C:"Steve McQueen", D:"James Dean", vaikeusaste:3, kuva: "images/hipster.jpg"};
 
 
 var Questions=[Question1, Question2, Question3, Question4, Question5, Question6, Question7, Question8, Question9, Question10, Question11, Question12, Question13, Question14, Question15, Question16];
+
+function generateQuestions(){
+	return Questions.slice(0,12);
+}
