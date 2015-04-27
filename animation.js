@@ -13,7 +13,7 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 
 	//the menu
 	if(gamestate.Name=="menu"){
-		context.drawImage(images[1], gamestate.count*500,0, 500,333, 0, 0, 720,480);
+		context.drawImage(images[0], gamestate.count*500,0, 500,333, 0, 0, 720,480);
 		if(count%7==0){
 			gamestate.count=(gamestate.count+1)%4;
 		}
@@ -141,19 +141,54 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 	}
 	//draws the backgroundImage
 	function drawBackground(){
-		context.drawImage(images[0],0,0,720,480);
+		context.drawImage(images[questionNumber],0,0,720,480);
 	}
 }
 
 //loads the images (only once)
-function loadImages(){
+function loadImages(questions){
 	var images=[];
-	var backgroundImage1 = new Image();
-	backgroundImage1.src = 'images/mopojengi.png';
-	images.push(backgroundImage1);
+
 	var gifImage= new Image();
 	gifImage.src= 'images/GIFtest.png';
 	images.push(gifImage);
+
+	var backgroundImage1 = new Image();
+	backgroundImage1.src=questions[0].kuva;
+	images.push(backgroundImage1);
+	var backgroundImage2 = new Image();
+	backgroundImage2.src=questions[1].kuva;
+	images.push(backgroundImage2);
+	var backgroundImage3 = new Image();
+	backgroundImage3.src=questions[2].kuva;
+	images.push(backgroundImage3);
+	var backgroundImage4 = new Image();
+	backgroundImage4.src=questions[3].kuva;
+	images.push(backgroundImage4);
+	var backgroundImage5 = new Image();
+	backgroundImage5.src=questions[4].kuva;
+	images.push(backgroundImage5);
+	var backgroundImage6 = new Image();
+	backgroundImage6.src=questions[5].kuva;
+	images.push(backgroundImage6);
+	var backgroundImage7 = new Image();
+	backgroundImage7.src=questions[6].kuva;
+	images.push(backgroundImage7);
+	var backgroundImage8 = new Image();
+	backgroundImage8.src=questions[7].kuva;
+	images.push(backgroundImage8);
+	var backgroundImage9 = new Image();
+	backgroundImage9.src=questions[8].kuva;
+	images.push(backgroundImage9);
+	var backgroundImage10 = new Image();
+	backgroundImage10.src=questions[9].kuva;
+	images.push(backgroundImage10);
+	var backgroundImage11 = new Image();
+	backgroundImage11.src=questions[10].kuva;
+	images.push(backgroundImage11);
+	var backgroundImage12 = new Image();
+	backgroundImage12.src=questions[11].kuva;
+	images.push(backgroundImage12);
 
 	return images;
 }

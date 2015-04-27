@@ -17,8 +17,9 @@ function initCanvas() {
 
 
   //loads the background Images
-  var images=loadImages();
+  
   var questions=generateQuestions();
+  var images=loadImages(questions);
 
   //starts the game
   runGame(images,questions);
