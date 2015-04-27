@@ -6,9 +6,16 @@ function runGame(images,questions){
 	var questionIndex=0;
 	var timer= Date.now();
 	var delta;
-
-	var gamestate={Name:"menu", count:0};
+	var count=0;
 	
+	/*var GAMESTATE={
+	    MENU: {count:0},
+	    GAME: {count:0},
+	    HIGHSCORES: {count:0},
+	    INSTRUCTIONS: {count:0} 
+  	}*/
+
+  	var currentgamestate={Name:"menu", count:0};
 	
 	//needed for the timer bar
 	function updateDelta() {
@@ -19,40 +26,65 @@ function runGame(images,questions){
 	requestAnimationFrame(gameLoop);
 
 	function updateGameState(){
-		gamestate.count++;
+		count++;
 		updateDelta();
 		currentquestion=questions[Math.min(questionIndex,11)];
 	}
 
 	function gameLoop(time) {
 		updateGameState();
-    	loadGraphics(delta,images,currentquestion,Math.min(questionIndex+1,12), gamestate);
+    	loadGraphics(delta,images,currentquestion,Math.min(questionIndex+1,12), currentgamestate,count);
     	requestAnimationFrame(gameLoop);
   	}
 
   	function listenToMouse(){
 		document.addEventListener("mousedown",function(e){
 		    var pos=getMousePos(e);
+
+		    //Game events
 		    //upper right box
-		    if((pos.X>60 && pos.X<300) && (pos.Y>240 && pos.Y<340)){
-				questionIndex++;
-				timer=Date.now();
+		    if(currentgamestate.Name="game"){
+			    if((pos.X>60 && pos.X<300) && (pos.Y>240 && pos.Y<340)){
+					questionIndex++;
+					timer=Date.now();
+				}
+				//upper left
+				if((pos.X>370 && pos.X<540) && (pos.Y>240 && pos.Y<340)){
+					questionIndex++;
+					timer=Date.now();
+				}
+				//down right
+				if((pos.X>60 && pos.X<300) && (pos.Y>360 && pos.Y<460)){
+					questionIndex++;
+					timer=Date.now();
+				}
+				//down left
+			    if((pos.X>370 && pos.X<540) && (pos.Y>360 && pos.Y<460)){
+					questionIndex++;
+					timer=Date.now();
+				}
 			}
-			//upper left
-			if((pos.X>370 && pos.X<540) && (pos.Y>240 && pos.Y<340)){
-				questionIndex++;
-				timer=Date.now();
+
+			//menu events
+			if(currentgamestate.Name=="menu"){
+				if(pos.X>185 && pos.X<535){
+					//play game
+					if(pos.Y>150 && pos.Y<230){
+						currentgamestate.Name="game";
+					}
+					//instructions
+					if(pos.Y>250 && pos.Y<330){
+						//gamestate =>instructions
+						console.log("instructions");
+					}
+					//highscores
+					if(pos.Y>350 && pos.Y<430){
+						//gamestate =>highscores
+						console.log("highscores");
+					}
+				}
 			}
-			//down right
-			if((pos.X>60 && pos.X<300) && (pos.Y>360 && pos.Y<460)){
-				questionIndex++;
-				timer=Date.now();
-			}
-			//down left
-		    if((pos.X>370 && pos.X<540) && (pos.Y>360 && pos.Y<460)){
-				questionIndex++;
-				timer=Date.now();
-			}			
+
 	});
 		//converts the page coordinates to canvas coordinates
 		function getMousePos(event) {

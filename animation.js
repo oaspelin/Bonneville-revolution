@@ -1,10 +1,11 @@
 
 //this function needs additional parameters when we progress EG. what question, also it should take as parameter an array of images
-function loadGraphics(timer,images,question,questionNumber, gamestate) {
+function loadGraphics(timer,images,question,questionNumber, gamestate,count) {
 	//calls the functions for rendering the game
 	clearCanvas();
 
-	if(gamestate=="game"){
+
+	if(gamestate.Name=="game"){
 		drawBackground();
 		drawBoxes();
 		drawStatusBar();
@@ -12,15 +13,23 @@ function loadGraphics(timer,images,question,questionNumber, gamestate) {
 		drawText();
 	}
 
+	//the menu
 	if(gamestate.Name=="menu"){
-
 		context.drawImage(images[1], gamestate.count*500,0, 500,333, 0, 0, 720,480);
-		if(gamestate.count>4){
-			gamestate.count=0;
-			}
-		else{
-			gamestate.count++;
+		if(count%7==0){
+			gamestate.count=(gamestate.count+1)%4;
 		}
+		drawRoundRect(185,150,350,80,10);
+		drawRoundRect(185,250,350,80,10);
+		drawRoundRect(185,350,350,80,10);
+		context.font = "bold 50px 'Electrolize'";
+		context.fillStyle="black";
+		context.textAlign="center";
+		context.fillText("Bonnevillle Revolution",360,50,350);
+		context.fillText("Quizmaster",360, 100,350);
+		context.fillText("Play Game", 360,200,80);
+		context.fillText("Instructions", 360,300 ,80);
+		context.fillText("Highscores", 360, 400,80);
 	}
 
 	function clearCanvas() {
@@ -32,11 +41,11 @@ function loadGraphics(timer,images,question,questionNumber, gamestate) {
 		context.font = "bold 30px 'Electrolize'";
 		context.fillStyle="black";
 		context.textAlign="center";
-		context.fillText(question.Kysymys,360,150);
-		context.fillText(question.A,205,290);
-		context.fillText(question.B,515,290);
-		context.fillText(question.C,205,410);
-		context.fillText(question.D,515,410);
+		context.fillText(question.Kysymys,360,150,580);
+		context.fillText(question.A,205,290,260);
+		context.fillText(question.B,515,290,260);
+		context.fillText(question.C,205,410,260);
+		context.fillText(question.D,515,410,260);
 	}
 	
 	function drawBoxes(){
