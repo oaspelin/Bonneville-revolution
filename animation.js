@@ -54,10 +54,10 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 		context.fillStyle="black";
 		context.textAlign="center";
 		context.fillText(question.Kysymys,360,150,580);
-		context.fillText(question.A,205,290,260);
-		context.fillText(question.B,515,290,260);
-		context.fillText(question.C,205,410,260);
-		context.fillText(question.D,515,410,260);
+		context.fillText(question.A,205,300,260);
+		context.fillText(question.B,515,300,260);
+		context.fillText(question.C,205,420,260);
+		context.fillText(question.D,515,420,260);
 	}
 	
 	function drawBoxes(){
