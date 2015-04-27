@@ -1,10 +1,8 @@
 
 //this function needs additional parameters when we progress EG. what question, also it should take as parameter an array of images
-function loadGraphics(timer,images,question,questionNumber, gamestate,count) {
+function loadGraphics(timer,images,question,questionNumber, gamestate,count,mousepos) {
 	//calls the functions for rendering the game
 	clearCanvas();
-
-
 	if(gamestate.Name=="game"){
 		drawBackground();
 		drawBoxes();
@@ -19,9 +17,14 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count) {
 		if(count%7==0){
 			gamestate.count=(gamestate.count+1)%4;
 		}
-		drawRoundRect(185,150,350,80,10);
-		drawRoundRect(185,250,350,80,10);
-		drawRoundRect(185,350,350,80,10);
+		for(i=0; i<3;i++){
+			if(checkmousepos(185,150+100*i,350,80)){
+				drawRoundRect(185-10,150+100*i-10,370,100,10);
+			}
+			else{
+				drawRoundRect(185,150+100*i,350,80,10);
+			}
+		}
 		context.font = "bold 50px 'Electrolize'";
 		context.fillStyle="black";
 		context.textAlign="center";
@@ -30,6 +33,15 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count) {
 		context.fillText("Play Game", 360,200,80);
 		context.fillText("Instructions", 360,300 ,80);
 		context.fillText("Highscores", 360, 400,80);
+	}
+
+	function checkmousepos(x,y, width, height){
+		if((mousepos.X>x && mousepos.X< x+width) && (mousepos.Y>y && mousepos.Y< y+height)){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 
 	function clearCanvas() {
@@ -56,10 +68,30 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count) {
 
 	//draws the small boxes containing the answers
 	function drawAnswerboxes(){
-		drawRoundRect(60,240,290,100,10);
-		drawRoundRect(370,240,290,100,10);
-		drawRoundRect(60,360,290,100,10);
-		drawRoundRect(370,360,290,100,10);
+		if(checkmousepos(60,240,290,100)){
+			drawRoundRect(60-10,240-10,290+20,100+20,10);
+		}
+		else{
+			drawRoundRect(60,240,290,100,10);
+		}
+		if(checkmousepos(370,240,290,100)){
+			drawRoundRect(370-10,240-10,290+20,100+20,10);
+		}
+		else{
+			drawRoundRect(370,240,290,100,10);
+		}
+		if(checkmousepos(60,360,290,100)){
+			drawRoundRect(60-10,360-10,290+20,100+20,10);
+		}
+		else{
+			drawRoundRect(60,360,290,100,10);
+		}
+		if(checkmousepos(370,360,290,100)){
+			drawRoundRect(370-10,360-10,290+20,100+20,10);
+		}
+		else{
+			drawRoundRect(370,360,290,100,10);
+		}
 	}
 
 	function drawRoundRect(x, y, width, height, cornerRadius){

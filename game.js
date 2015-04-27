@@ -7,6 +7,7 @@ function runGame(images,questions){
 	var timer= Date.now();
 	var delta;
 	var count=0;
+	var mousepos={X:0,Y:0};
 
   	var currentgamestate={Name:"menu", count:0};
 	
@@ -26,11 +27,16 @@ function runGame(images,questions){
 
 	function gameLoop(time) {
 		updateGameState();
-    	loadGraphics(delta,images,currentquestion,Math.min(questionIndex+1,12), currentgamestate,count);
+    	loadGraphics(delta,images,currentquestion,Math.min(questionIndex+1,12), currentgamestate,count,mousepos);
     	requestAnimationFrame(gameLoop);
   	}
 
   	function listenToMouse(){
+  		document.addEventListener("mousemove",function(e){
+  			var pos=getMousePos(e);
+  			mousepos=pos;
+  		});
+
 		document.addEventListener("mousedown",function(e){
 		    var pos=getMousePos(e);
 
