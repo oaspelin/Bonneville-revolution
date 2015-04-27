@@ -7,13 +7,6 @@ function runGame(images,questions){
 	var timer= Date.now();
 	var delta;
 	var count=0;
-	
-	/*var GAMESTATE={
-	    MENU: {count:0},
-	    GAME: {count:0},
-	    HIGHSCORES: {count:0},
-	    INSTRUCTIONS: {count:0} 
-  	}*/
 
   	var currentgamestate={Name:"menu", count:0};
 	
@@ -43,7 +36,7 @@ function runGame(images,questions){
 
 		    //Game events
 		    //upper right box
-		    if(currentgamestate.Name="game"){
+		    if(currentgamestate.Name=="game"){
 			    if((pos.X>60 && pos.X<300) && (pos.Y>240 && pos.Y<340)){
 					questionIndex++;
 					timer=Date.now();
@@ -67,25 +60,23 @@ function runGame(images,questions){
 
 			//menu events
 			if(currentgamestate.Name=="menu"){
-				if(pos.X>185 && pos.X<535){
+				if((pos.X>185 && pos.X<535) && (pos.Y>150 && pos.Y<230)){
 					//play game
-					if(pos.Y>150 && pos.Y<230){
-						currentgamestate.Name="game";
-					}
-					//instructions
-					if(pos.Y>250 && pos.Y<330){
-						//gamestate =>instructions
-						console.log("instructions");
-					}
-					//highscores
-					if(pos.Y>350 && pos.Y<430){
-						//gamestate =>highscores
-						console.log("highscores");
-					}
+					currentgamestate.Name="game";
+				}
+				//instructions
+				if((pos.X>185 && pos.X<535) && (pos.Y>250 && pos.Y<330)){
+					//gamestate =>instructions
+					console.log("instructions");
+				}
+				//highscores
+				if((pos.X>185 && pos.X<535) && (pos.Y>350 && pos.Y<430)){
+					//gamestate =>highscores
+					console.log("highscores");
 				}
 			}
+		});
 
-	});
 		//converts the page coordinates to canvas coordinates
 		function getMousePos(event) {
 		    var rect = canvas.getBoundingClientRect();
