@@ -69,6 +69,7 @@ function runGame(images,questions){
 				if((pos.X>185 && pos.X<535) && (pos.Y>150 && pos.Y<230)){
 					//play game
 					currentgamestate.Name="game";
+					timer=Date.now();
 				}
 				//instructions
 				if((pos.X>185 && pos.X<535) && (pos.Y>250 && pos.Y<330)){
