@@ -8,9 +8,11 @@ function runGame(images,questions){
 	var delta;
 	var count=0;
 	var mousepos={X:0,Y:0};
+	var answearLocation;
+	var boxLocation;
 
   	var currentgamestate={Name:"menu", count:0};
-	
+
 	//needed for the timer bar
 	function updateDelta() {
     	var now = Date.now();
@@ -23,6 +25,9 @@ function runGame(images,questions){
 		count++;
 		updateDelta();
 		currentquestion=questions[Math.min(questionIndex,11)];
+		if (timer > 30000) {
+			quitGame();
+		}
 	}
 
 	function gameLoop(time) {
@@ -43,24 +48,42 @@ function runGame(images,questions){
 		    //Game events
 		    //upper right box
 		    if(currentgamestate.Name=="game"){
-			    if((pos.X>60 && pos.X<300) && (pos.Y>240 && pos.Y<340)){
+			    if((pos.X>60 && pos.X<300) && (pos.Y>240 && pos.Y<340)){  // tarkista vastaus
+					boxLocation = 1;
+					if (boxLocation == answearLocation) {
 					questionIndex++;
 					timer=Date.now();
+						}
+					else quitGame;
+
 				}
+
 				//upper left
 				if((pos.X>370 && pos.X<540) && (pos.Y>240 && pos.Y<340)){
+					boxLocation = 2;
+					if (boxLocation == answearLocation) {
 					questionIndex++;
 					timer=Date.now();
+						}
+					else quitGame;
 				}
 				//down right
 				if((pos.X>60 && pos.X<300) && (pos.Y>360 && pos.Y<460)){
+					boxLocation = 3;
+					if (boxLocation == answearLocation) {
 					questionIndex++;
 					timer=Date.now();
+						}
+					else quitGame;
 				}
 				//down left
 			    if((pos.X>370 && pos.X<540) && (pos.Y>360 && pos.Y<460)){
-					questionIndex++;
-					timer=Date.now();
+						boxLocation = 4;
+						if (boxLocation == answearLocation) {
+						questionIndex++;
+						timer=Date.now();
+							}
+						else quitGame;
 				}
 			}
 
@@ -95,4 +118,9 @@ function runGame(images,questions){
 		    };
 		}
 	}
+
+	function quitGame() {
+
+	}
+
 }
