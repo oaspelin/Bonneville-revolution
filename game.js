@@ -78,8 +78,16 @@ function runGame(images,questions){
 				}
 				//highscores
 				if((pos.X>185 && pos.X<535) && (pos.Y>350 && pos.Y<430)){
-					//gamestate =>highscores
 					console.log("highscores");
+					currentgamestate.Name="highscores";
+				}
+			}
+
+			//highscore events
+			if(currentgamestate.Name=="highscores"){
+				if((pos.X>210 && pos.X<510) && (pos.Y>380 && pos.Y<460)){
+					//back to menu
+					currentgamestate.Name="menu";
 				}
 			}
 		});
