@@ -3,7 +3,7 @@ function runGame(images,questions){
 	//reacts on mouseclicks
 	listenToMouse();
 	var currentquestion;
-	var questionIndex=0;
+	var questionIndex=1;
 	var timer= Date.now();
 	var delta;
 	var count=0;
@@ -27,7 +27,7 @@ function runGame(images,questions){
 
 	function gameLoop(time) {
 		updateGameState();
-    	loadGraphics(delta,images,currentquestion,Math.min(questionIndex+1,12), currentgamestate,count,mousepos);
+    	answerLocation=loadGraphics(delta,images,currentquestion,Math.min(questionIndex,12), currentgamestate,count,mousepos);
     	requestAnimationFrame(gameLoop);
   	}
 

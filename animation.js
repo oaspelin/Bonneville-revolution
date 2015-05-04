@@ -56,6 +56,8 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 		context.fillText(question.Kysymys,360,150,580);
 		//randomilla kysymykset
 		context.fillText(question.A,205,300,260);
+		answerLocation=1;
+
 		context.fillText(question.B,515,300,260);
 		context.fillText(question.C,205,420,260);
 		context.fillText(question.D,515,420,260);
@@ -144,6 +146,7 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 	function drawBackground(){
 		context.drawImage(images[questionNumber],0,0,720,480);
 	}
+
 }
 
 //loads the images (only once)
