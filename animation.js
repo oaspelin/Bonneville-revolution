@@ -1,6 +1,6 @@
 
 //this function needs additional parameters when we progress EG. what question, also it should take as parameter an array of images
-function loadGraphics(timer,images,question,questionNumber, gamestate,count,mousepos) {
+function loadGraphics(timer,images,question,questionNumber, gamestate,count,mousepos,highscores) {
 	//calls the functions for rendering the game
 	clearCanvas();
 	if(gamestate.Name=="game"){
@@ -52,6 +52,10 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 		context.textAlign="center";
 		context.fillText("Highscores",360,60,400);
 		context.fillText("Back to Menu", 360,435,220);
+		context.font="30px 'Electrolize'";
+		for(i=0; i<3; i++){
+			context.fillText("Name:"+highscores[i].name+"  Score:"+highscores[i].score, 360, 120+50*i, 300);
+		}
 	}
 
 	function checkmousepos(x,y, width, height){

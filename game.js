@@ -1,4 +1,4 @@
-function runGame(images,questions){
+function runGame(images,questions,highscores){
 
 	//reacts on mouseclicks
 	listenToMouse();
@@ -27,7 +27,7 @@ function runGame(images,questions){
 
 	function gameLoop(time) {
 		updateGameState();
-    	answerLocation=loadGraphics(delta,images,currentquestion,Math.min(questionIndex,12), currentgamestate,count,mousepos);
+    	answerLocation=loadGraphics(delta,images,currentquestion,Math.min(questionIndex,12), currentgamestate,count,mousepos,highscores);
     	requestAnimationFrame(gameLoop);
   	}
 
