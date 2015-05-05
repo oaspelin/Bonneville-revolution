@@ -7,18 +7,7 @@ window.onload = initCanvas;
 
 function initCanvas() {
 
-  var myFirebaseRef = new Firebase("https://bonnevillehighscores.firebaseio.com/");
-  // Get a reference to our posts
-var ref = new Firebase("https://docs-examples.firebaseio.com/web/saving-data/fireblog/posts");
 
-// Attach an asynchronous callback to read the data at our posts reference
-myFirebaseRef.on("value", function(snapshot) {
-  console.log(snapshot.val());
-  var json=snapshot.val();
-  console.log(json.highscore[1].name);
-}, function (errorObject) {
-  console.log("The read failed: " + errorObject.code);
-});
   
   canvas = document.querySelector("canvas");
   context = canvas.getContext( "2d" );
@@ -35,6 +24,10 @@ myFirebaseRef.on("value", function(snapshot) {
   var images=loadImages(questions);
   highscores=loadHighscores();
   console.log(highscores);
+
+  //For highscores
+  //var person = prompt("Please enter your name", "");
+
   
   //starts the game
   runGame(images,questions, highscores);
@@ -59,8 +52,18 @@ function loadHighscores(){
       highscores[i]=json.highscore[i];
     }
   })();
-  highscores[1].name="Oskar"; 
+
+  /* Tarvitaan myöhemmin, päivittää JSON
+  var myFirebaseRef = new Firebase("https://bonnevillehighscores.firebaseio.com/");
+  var highscoreRef = myFirebaseRef.child("highscore");
+  var myFirebaseRef = highscoreRef.child("1");
+    myFirebaseRef.update({
+    "name": "Olle"
+  });
+*/
   
   return highscores;
 }
+
+
 

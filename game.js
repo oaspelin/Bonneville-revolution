@@ -74,7 +74,7 @@ function runGame(images,questions,highscores){
 				//instructions
 				if((pos.X>185 && pos.X<535) && (pos.Y>250 && pos.Y<330)){
 					//gamestate =>instructions
-					console.log("instructions");
+					currentgamestate.Name="instructions";
 				}
 				//highscores
 				if((pos.X>185 && pos.X<535) && (pos.Y>350 && pos.Y<430)){
@@ -85,6 +85,14 @@ function runGame(images,questions,highscores){
 
 			//highscore events
 			if(currentgamestate.Name=="highscores"){
+				if((pos.X>210 && pos.X<510) && (pos.Y>380 && pos.Y<460)){
+					//back to menu
+					currentgamestate.Name="menu";
+				}
+			}
+
+			//instructions events
+			if(currentgamestate.Name=="instructions"){
 				if((pos.X>210 && pos.X<510) && (pos.Y>380 && pos.Y<460)){
 					//back to menu
 					currentgamestate.Name="menu";

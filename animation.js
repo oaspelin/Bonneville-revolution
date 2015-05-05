@@ -58,6 +58,26 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 		}
 	}
 
+	if(gamestate.Name=="instructions"){
+		context.drawImage(images[0], gamestate.count*500,0, 500,333, 0, 0, 720,480);
+		if(count%7==0){
+			gamestate.count=(gamestate.count+1)%4;
+		}
+		drawRoundRect(160,80,400,280,10);
+		if(checkmousepos(210,380,300,80)){
+			drawRoundRect(210-10,380-10,320,100,10);
+		}
+		else{
+			drawRoundRect(210,380,300,80,10);
+		}
+		context.font="bold 50px 'Electrolize'";
+		context.fillStyle="black";
+		context.textAlign="center";
+		context.fillText("Instructions",360,60,400);
+		context.fillText("Back to Menu", 360,435,220);
+		context.font="30px 'Electrolize'";
+	}
+
 	function checkmousepos(x,y, width, height){
 		if((mousepos.X>x && mousepos.X< x+width) && (mousepos.Y>y && mousepos.Y< y+height)){
 			return true;
