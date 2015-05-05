@@ -26,7 +26,7 @@ var Question13 = {Kysymys:"Triumphin moottoripyörät kootaan Englannissa Hincle
 
 var Question14 = {Kysymys:"Kuinka monta ihmistä voi ajaa Bonneville Revolution parvessa turvallisesti?", A:"16", B:"3", C:"6", D:"10", vaikeusaste:3, kuva: "images/mopojengi.jpg"};
 
-var Question15 = {Kysymys:"Mihin tekniikoihin perustuu Bonneville Revolutionin ohjauksesta huolehtiva parviäly?", A:"Ultraääni ja GPS", B:"Infrapuna ja 5G", C:"Laser ja RS8", D:"Röntgensäteet ja SCK", vaikeusaste:3, kuva: "niityllä.jpg"};
+var Question15 = {Kysymys:"Mihin tekniikoihin perustuu Bonneville Revolutionin ohjauksesta huolehtiva parviäly?", A:"Ultraääni ja GPS", B:"Infrapuna ja 5G", C:"Laser ja RS8", D:"Röntgensäteet ja SCK", vaikeusaste:3, kuva: "images/niityllä.jpg"};
 
 var Question16 = {Kysymys:"Moni tunnettu supertähti esiintyi Triumphin mainoksissa 1950-luvulla. Kuka seuraavista henkilöistä ei ole esiintynyt Triumphin mainoksissa?", A:"Sean Connery", B:"Elvis Presley", C:"Steve McQueen", D:"James Dean", vaikeusaste:3, kuva: "images/hipster.jpg"};
 

@@ -1,9 +1,9 @@
-function runGame(images,questions){
+function runGame(images,questions,highscores){
 
 	//reacts on mouseclicks
 	listenToMouse();
 	var currentquestion;
-	var questionIndex=0;
+	var questionIndex=1;
 	var timer= Date.now();
 	var delta;
 	var count=0;
@@ -27,7 +27,7 @@ function runGame(images,questions){
 
 	function gameLoop(time) {
 		updateGameState();
-    	loadGraphics(delta,images,currentquestion,Math.min(questionIndex+1,12), currentgamestate,count,mousepos);
+    	answerLocation=loadGraphics(delta,images,currentquestion,Math.min(questionIndex,12), currentgamestate,count,mousepos,highscores);
     	requestAnimationFrame(gameLoop);
   	}
 
@@ -74,12 +74,28 @@ function runGame(images,questions){
 				//instructions
 				if((pos.X>185 && pos.X<535) && (pos.Y>250 && pos.Y<330)){
 					//gamestate =>instructions
-					console.log("instructions");
+					currentgamestate.Name="instructions";
 				}
 				//highscores
 				if((pos.X>185 && pos.X<535) && (pos.Y>350 && pos.Y<430)){
-					//gamestate =>highscores
 					console.log("highscores");
+					currentgamestate.Name="highscores";
+				}
+			}
+
+			//highscore events
+			if(currentgamestate.Name=="highscores"){
+				if((pos.X>210 && pos.X<510) && (pos.Y>380 && pos.Y<460)){
+					//back to menu
+					currentgamestate.Name="menu";
+				}
+			}
+
+			//instructions events
+			if(currentgamestate.Name=="instructions"){
+				if((pos.X>210 && pos.X<510) && (pos.Y>380 && pos.Y<460)){
+					//back to menu
+					currentgamestate.Name="menu";
 				}
 			}
 		});
