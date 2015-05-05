@@ -1,0 +1,16 @@
+{
+	"highscore" :[
+		{
+			"name":"Pelle", 
+			"score":"1000"
+			},
+		{
+			"name":"Olle", 
+			"score":"100"
+			},
+		{
+			"name":"Kalle", 
+			"score":"10"
+		}
+	]
+}
