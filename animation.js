@@ -17,24 +17,28 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 		if(count%7==0){
 			gamestate.count=(gamestate.count+1)%4;
 		}
+		//Nämä pienempiä
 		for(i=0; i<3;i++){
-			if(checkmousepos(185,150+100*i,350,80)){
-				drawRoundRect(185-10,150+100*i-10,370,100,10);
+			if(checkmousepos(225,150+100*i,270,80)){
+				drawRoundRect(225-10,150+100*i-10,290,100,10);
 			}
 			else{
-				drawRoundRect(185,150+100*i,350,80,10);
+				drawRoundRect(225,150+100*i,270,80,10);
 			}
 		}
-		context.font = "bold 50px 'Electrolize'";
+		context.font = "bold 70px 'Special Elite'";
 		context.fillStyle="black";
 		context.textAlign="center";
-		context.fillText("Bonnevillle Revolution",360,50,350);
-		context.fillText("Quizmaster",360, 100,350);
-		context.fillText("Play Game", 360,200,80);
-		context.fillText("Instructions", 360,300 ,80);
-		context.fillText("Highscores", 360, 400,80);
+		context.fillText("Bonneville Revolution",360,70,550);
+		context.font = "bold 50px 'Special Elite";
+		context.fillText("Tietovisa",360, 120,350);
+		context.fillText("Pelaa", 360,200,150);
+		context.fillText("Ohjeet", 360,300 ,150);
+		context.fillText("Ennätykset", 360, 400,150);
 	}
 
+	//1. Pelle: 1000
+	//5 parhainta
 	if(gamestate.Name=="highscores"){
 		context.drawImage(images[0], gamestate.count*500,0, 500,333, 0, 0, 720,480);
 		if(count%7==0){
@@ -47,12 +51,12 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 		else{
 			drawRoundRect(210,380,300,80,10);
 		}
-		context.font="bold 50px 'Electrolize'";
+		context.font="bold 50px 'Special Elite'";
 		context.fillStyle="black";
 		context.textAlign="center";
 		context.fillText("Highscores",360,60,400);
 		context.fillText("Back to Menu", 360,435,220);
-		context.font="30px 'Electrolize'";
+		context.font="30px 'Special Elite'";
 		for(i=0; i<3; i++){
 			context.fillText("Name:"+highscores[i].name+"  Score:"+highscores[i].score, 360, 120+50*i, 300);
 		}
