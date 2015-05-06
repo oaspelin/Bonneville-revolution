@@ -33,7 +33,7 @@ function runGame(images,questions,highscores){
 
 	function gameLoop(time) {
 		updateGameState();
-    	answerLocation=loadGraphics(delta,images,currentquestion,Math.min(questionIndex,12), currentgamestate,count,mousepos,highscores);
+    	answerLocation=loadGraphics(delta,images,currentquestion,Math.min(questionIndex,12), currentgamestate,count,mousepos,highscores,points);
     	requestAnimationFrame(gameLoop);
   	}
 
@@ -138,6 +138,14 @@ function runGame(images,questions,highscores){
 				if((pos.X>210 && pos.X<510) && (pos.Y>380 && pos.Y<460)){
 					//back to menu
 					currentgamestate.Name="menu";
+				}
+			}
+
+			//Loose events
+			if(currentgamestate.Name=="loose"){
+				if((pos.X>210 && pos.X<510) && (pos.Y>380 && pos.Y<460)){
+					//Check highscores
+					currentgamestate.Name="highscores";
 				}
 			}
 		});

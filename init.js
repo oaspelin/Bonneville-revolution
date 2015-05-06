@@ -14,11 +14,11 @@ function initCanvas() {
   CanvasText.config({
     canvas: canvas,
     context: context,
-    fontFamily: "Verdana",
-    fontSize: "14px",
+    fontFamily: "Special Elite",
+    fontSize: "17px",
     fontWeight: "normal",
     fontColor: "#000",
-    lineHeight: "22"
+    lineHeight: "20"
   });
   
   canvas.width = 720;

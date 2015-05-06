@@ -1,6 +1,6 @@
 
 //this function needs additional parameters when we progress EG. what question, also it should take as parameter an array of images
-function loadGraphics(timer,images,question,questionNumber, gamestate,count,mousepos,highscores) {
+function loadGraphics(timer,images,question,questionNumber, gamestate,count,mousepos,highscores,points) {
 	//calls the functions for rendering the game
 	var answerLocation;
 	clearCanvas();
@@ -21,6 +21,17 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 		context.font = "bold 70px 'Special Elite'";
 		context.textAlign="center";
 		context.fillText("Hävisit",360,210,550);
+		context.font= "bold 50px 'Special Elite'";
+		context.fillText("Sait:"+points+" pistettä",360,300,550);
+
+		if(checkmousepos(210,380,300,80)){
+			drawRoundRect(210-10,380-10,320,100,10);
+		}
+		else{
+			drawRoundRect(210,380,300,80,10);
+		}
+		context.fillStyle="black";
+		context.fillText("Check Highscores", 360,435,220);
 	}
 
 	//the menu
@@ -69,8 +80,9 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 		context.fillText("Highscores",360,60,400);
 		context.fillText("Back to Menu", 360,435,220);
 		context.font="30px 'Special Elite'";
+		context.textAlign="start";
 		for(i=0; i<3; i++){
-			context.fillText("Name:"+highscores[i].name+"  Score:"+highscores[i].score, 360, 120+50*i, 300);
+			context.fillText(i+1+". "+highscores[i].name+": "+highscores[i].score, 220, 120+30*i, 300);
 		}
 	}
 
@@ -79,24 +91,23 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 		if(count%9==0){
 			gamestate.count=(gamestate.count+1)%4;
 		}
-		drawRoundRect(160,80,400,280,10);
+		drawRoundRect(30,70,660,290,10);
 		if(checkmousepos(210,380,300,80)){
 			drawRoundRect(210-10,380-10,320,100,10);
 		}
 		else{
 			drawRoundRect(210,380,300,80,10);
 		}
-		context.font="bold 50px 'Electrolize'";
+		context.font="bold 50px 'Special Elite'";
 		context.fillStyle="black";
 		context.textAlign="center";
-		context.fillText("Instructions",360,60,400);
+		context.fillText("Ohjeet",360,60,400);
 		context.fillText("Back to Menu", 360,435,220);
-		context.font="30px 'Electrolize'";
 		CanvasText.drawText({
-			text:"Tervetuloa osallistumaan Triumph Bonneville Revolution tietovisaan! Vastaamalla oikein kaikkiin kysymyksiinn, voit voittaa moottoripyöräsafarin Euroopassa. Safariin sisältyy vierailu Triumphin tehtailla. <br/> Kysymyksiä on kaksitoista kappaletta ja ne vaikenevat loppua kohti. Jokaiseen kysymykseen on neljä vastausvaihtoehtoa joista yksi on oikea, valitsemalla väärän vastauksen peli loppuu. Kysymyksiin pitää vastata 30 sekunnin kuluessa, ajan loputtua peli katkeaa.<br/>Vastattuanne oikein kaikkiin kysymyksiin oikein, keräämme yhteystietonne mahdollista palkintoa varten. Palkintoja arvotaan kymmenen kappaletta kaikkien oikein vastanneiden kesken. Peliin voivat osallistua ainoastaan valtuutetut Triumph-myyjät. Onnea peliin!" ,
-			x: 180,
-			y: 100,
-			boxWidth: 360
+			text:"Tervetuloa osallistumaan Triumph Bonneville Revolution tietovisaan! Vastaamalla oikein kaikkiin kysymyksiinn, voit voittaa moottoripyöräsafarin Euroopassa. Safariin sisältyy vierailu Triumphin tehtailla. <br/> Kysymyksiä on kaksitoista kappaletta ja ne vaikenevat loppua kohti. Jokaiseen kysymykseen on neljä vastausvaihtoehtoa joista yksi on oikea, valitsemalla väärän vastauksen peli loppuu. Kysymyksiin pitää vastata 30 sekunnin kuluessa, ajan loputtua peli katkeaa.<br/>Vastattuanne oikein kaikkiin kysymyksiin oikein, keräämme yhteystietonne mahdollista palkintoa varten. Palkintoja arvotaan kymmenen kappaletta kaikkien oikein vastanneiden kesken. Peliin voivat osallistua ainoastaan valtuutetut Triumph-myyjät.               Onnea peliin!" ,
+			x: 40,
+			y: 90,
+			boxWidth: 650
 		});
 	}
 
