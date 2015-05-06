@@ -9,7 +9,7 @@ function runGame(images,questions,highscores){
 	var count=0;
 	var mousepos={X:0,Y:0};
 	var answerLocation;
-	var boxLocation;
+	var points=0;
 
   	var currentgamestate={Name:"menu", count:0};
 
@@ -25,9 +25,9 @@ function runGame(images,questions,highscores){
 		count++;
 		updateDelta();
 		currentquestion=questions[Math.min(questionIndex,11)];
-		if (timer > 30000) {
+	/*	if (timer > 30000) {
 			quitGame();
-		}
+		}*/
 	}
 
 	function gameLoop(time) {
@@ -50,8 +50,10 @@ function runGame(images,questions,highscores){
 		    if(currentgamestate.Name=="game"){
 			    if((pos.X>60 && pos.X<300) && (pos.Y>240 && pos.Y<340)){  // tarkista vastaus
 					if (answerLocation==1) {
+						points+=currentquestion.vaikeusaste;
 						questionIndex++;
 						timer=Date.now();
+						console.log(points);
 					}
 					else{
 						console.log("Loose");
@@ -136,10 +138,6 @@ function runGame(images,questions,highscores){
 		        Y: y - rect.top
 		    };
 		}
-	}
-
-	function quitGame() {
-
 	}
 
 }

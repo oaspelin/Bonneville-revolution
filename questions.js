@@ -37,7 +37,7 @@ function generateQuestions(){
 	
 	var elementsremoved=0;
 	//removes one random easy question from the array
-	var random=Math.round(Math.random()*(5-0)+0);S
+	var random=Math.round(Math.random()*(5-0)+0);
 	Questions.splice(random,1);
 	elementsremoved++;
 
