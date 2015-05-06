@@ -8,7 +8,7 @@ function runGame(images,questions,highscores){
 	var delta;
 	var count=0;
 	var mousepos={X:0,Y:0};
-	var answearLocation;
+	var answerLocation;
 	var boxLocation;
 
   	var currentgamestate={Name:"menu", count:0};
@@ -49,41 +49,44 @@ function runGame(images,questions,highscores){
 		    //upper right box
 		    if(currentgamestate.Name=="game"){
 			    if((pos.X>60 && pos.X<300) && (pos.Y>240 && pos.Y<340)){  // tarkista vastaus
-					boxLocation = 1;
-					if (boxLocation == answearLocation) {
-					questionIndex++;
-					timer=Date.now();
-						}
-					else quitGame;
-
+					if (answerLocation==1) {
+						questionIndex++;
+						timer=Date.now();
+					}
+					else{
+						console.log("Loose");
+					}
 				}
 
 				//upper left
 				if((pos.X>370 && pos.X<540) && (pos.Y>240 && pos.Y<340)){
-					boxLocation = 2;
-					if (boxLocation == answearLocation) {
-					questionIndex++;
-					timer=Date.now();
-						}
-					else quitGame;
+					if (answerLocation==2) {
+						questionIndex++;
+						timer=Date.now();
+					}
+					else{
+						console.log("Loose");
+					}
 				}
 				//down right
 				if((pos.X>60 && pos.X<300) && (pos.Y>360 && pos.Y<460)){
-					boxLocation = 3;
-					if (boxLocation == answearLocation) {
-					questionIndex++;
-					timer=Date.now();
-						}
-					else quitGame;
+					if (answerLocation==3) {
+						questionIndex++;
+						timer=Date.now();
+					}
+					else{
+						console.log("Loose");
+					}
 				}
 				//down left
 			    if((pos.X>370 && pos.X<540) && (pos.Y>360 && pos.Y<460)){
-						boxLocation = 4;
-						if (boxLocation == answearLocation) {
+					if (answerLocation==4) {
 						questionIndex++;
 						timer=Date.now();
-							}
-						else quitGame;
+					}
+					else{
+						console.log("Loose");
+					}
 				}
 			}
 

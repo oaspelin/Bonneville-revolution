@@ -2,6 +2,7 @@
 //this function needs additional parameters when we progress EG. what question, also it should take as parameter an array of images
 function loadGraphics(timer,images,question,questionNumber, gamestate,count,mousepos,highscores) {
 	//calls the functions for rendering the game
+	var answerLocation;
 	clearCanvas();
 	if(gamestate.Name=="game"){
 		drawBackground();
@@ -193,7 +194,7 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 	function drawBackground(){
 		context.drawImage(images[questionNumber],0,0,720,480);
 	}
-
+	return answerLocation;
 }
 
 //loads the images (only once)
