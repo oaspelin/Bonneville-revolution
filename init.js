@@ -7,10 +7,19 @@ window.onload = initCanvas;
 
 function initCanvas() {
 
-
-  
   canvas = document.querySelector("canvas");
   context = canvas.getContext( "2d" );
+
+  CanvasText = new CanvasText;
+  CanvasText.config({
+    canvas: canvas,
+    context: context,
+    fontFamily: "Verdana",
+    fontSize: "14px",
+    fontWeight: "normal",
+    fontColor: "#000",
+    lineHeight: "22"
+  });
   
   canvas.width = 720;
   canvas.height = 480;
@@ -23,7 +32,6 @@ function initCanvas() {
   var questions=generateQuestions();
   var images=loadImages(questions);
   highscores=loadHighscores();
-  console.log(highscores);
 
   //For highscores
   //var person = prompt("Please enter your name", "");

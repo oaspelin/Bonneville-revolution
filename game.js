@@ -28,12 +28,19 @@ function runGame(images,questions,highscores){
 	/*	if (timer > 30000) {
 			quitGame();
 		}*/
+
 	}
 
 	function gameLoop(time) {
 		updateGameState();
     	answerLocation=loadGraphics(delta,images,currentquestion,Math.min(questionIndex,12), currentgamestate,count,mousepos,highscores);
     	requestAnimationFrame(gameLoop);
+  	}
+
+  	function askforName(){
+  		var person = prompt("Please enter your name", "");
+  		currentgamestate.Name=="highscores";
+  		console.log(currentgamestate.Name);
   	}
 
   	function listenToMouse(){
@@ -56,38 +63,45 @@ function runGame(images,questions,highscores){
 						console.log(points);
 					}
 					else{
-						console.log("Loose");
+						askforName();
+						currentgamestate.Name="loose";
 					}
 				}
 
 				//upper left
 				if((pos.X>370 && pos.X<540) && (pos.Y>240 && pos.Y<340)){
 					if (answerLocation==2) {
+						points+=currentquestion.vaikeusaste;
 						questionIndex++;
 						timer=Date.now();
 					}
 					else{
-						console.log("Loose");
+						askforName();
+						currentgamestate.Name="loose";
 					}
 				}
 				//down right
 				if((pos.X>60 && pos.X<300) && (pos.Y>360 && pos.Y<460)){
 					if (answerLocation==3) {
+						points+=currentquestion.vaikeusaste;
 						questionIndex++;
 						timer=Date.now();
 					}
 					else{
-						console.log("Loose");
+						askforName();
+						currentgamestate.Name="loose";
 					}
 				}
 				//down left
 			    if((pos.X>370 && pos.X<540) && (pos.Y>360 && pos.Y<460)){
 					if (answerLocation==4) {
+						points+=currentquestion.vaikeusaste;
 						questionIndex++;
 						timer=Date.now();
 					}
 					else{
-						console.log("Loose");
+						askforName();
+						currentgamestate.Name="loose";
 					}
 				}
 			}

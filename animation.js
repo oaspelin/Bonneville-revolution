@@ -12,10 +12,21 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 		drawText();
 	}
 
+	//You loose screen
+	if(gamestate.Name=="loose"){
+		context.drawImage(images[0], gamestate.count*500,0, 500,333, 0, 0, 720,480);
+		if(count%9==0){
+			gamestate.count=(gamestate.count+1)%4;
+		}
+		context.font = "bold 70px 'Special Elite'";
+		context.textAlign="center";
+		context.fillText("Hävisit",360,210,550);
+	}
+
 	//the menu
 	if(gamestate.Name=="menu"){
 		context.drawImage(images[0], gamestate.count*500,0, 500,333, 0, 0, 720,480);
-		if(count%7==0){
+		if(count%9==0){
 			gamestate.count=(gamestate.count+1)%4;
 		}
 		//Nämä pienempiä
@@ -42,7 +53,7 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 	//5 parhainta
 	if(gamestate.Name=="highscores"){
 		context.drawImage(images[0], gamestate.count*500,0, 500,333, 0, 0, 720,480);
-		if(count%7==0){
+		if(count%9==0){
 			gamestate.count=(gamestate.count+1)%4;
 		}
 		drawRoundRect(160,80,400,280,10);
@@ -65,7 +76,7 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 
 	if(gamestate.Name=="instructions"){
 		context.drawImage(images[0], gamestate.count*500,0, 500,333, 0, 0, 720,480);
-		if(count%7==0){
+		if(count%9==0){
 			gamestate.count=(gamestate.count+1)%4;
 		}
 		drawRoundRect(160,80,400,280,10);
@@ -81,6 +92,12 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 		context.fillText("Instructions",360,60,400);
 		context.fillText("Back to Menu", 360,435,220);
 		context.font="30px 'Electrolize'";
+		CanvasText.drawText({
+			text:"Tervetuloa osallistumaan Triumph Bonneville Revolution tietovisaan! Vastaamalla oikein kaikkiin kysymyksiinn, voit voittaa moottoripyöräsafarin Euroopassa. Safariin sisältyy vierailu Triumphin tehtailla. <br/> Kysymyksiä on kaksitoista kappaletta ja ne vaikenevat loppua kohti. Jokaiseen kysymykseen on neljä vastausvaihtoehtoa joista yksi on oikea, valitsemalla väärän vastauksen peli loppuu. Kysymyksiin pitää vastata 30 sekunnin kuluessa, ajan loputtua peli katkeaa.<br/>Vastattuanne oikein kaikkiin kysymyksiin oikein, keräämme yhteystietonne mahdollista palkintoa varten. Palkintoja arvotaan kymmenen kappaletta kaikkien oikein vastanneiden kesken. Peliin voivat osallistua ainoastaan valtuutetut Triumph-myyjät. Onnea peliin!" ,
+			x: 180,
+			y: 100,
+			boxWidth: 360
+		});
 	}
 
 	function checkmousepos(x,y, width, height){
