@@ -7,7 +7,7 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 	if(gamestate.Name=="game"){
 		drawBackground();
 		drawBoxes();
-		drawStatusBar();
+		drawBar();
 		drawPhase();
 		drawText();
 	}
@@ -15,25 +15,49 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 	//You loose screen
 	if(gamestate.Name=="loose"){
 		if(timer>3000){
-		context.drawImage(images[0], gamestate.count*500,0, 500,333, 0, 0, 720,480);
-		if(count%9==0){
-			gamestate.count=(gamestate.count+1)%4;
-		}
-		context.font = "bold 70px 'Special Elite'";
-		context.textAlign="center";
-		context.fillText("Hävisit",360,210,550);
-		context.font= "bold 50px 'Special Elite'";
-		context.fillText("Sait:"+points+" pistettä",360,300,550);
+			context.drawImage(images[0], gamestate.count*500,0, 500,333, 0, 0, 720,480);
+			if(count%9==0){
+				gamestate.count=(gamestate.count+1)%4;
+			}
+			context.font = "bold 70px 'Special Elite'";
+			context.textAlign="center";
+			context.fillText("Hävisit",360,210,550);
+			context.font= "bold 50px 'Special Elite'";
+			context.fillText("Sait:"+points+" pistettä",360,300,550);
 
-		if(checkmousepos(210,380,300,80)){
-			drawRoundRect(210-10,380-10,320,100,10);
+			if(checkmousepos(210,380,300,80)){
+				drawRoundRect(210-10,380-10,320,100,10);
+			}
+			else{
+				drawRoundRect(210,380,300,80,10);
+			}
+			context.fillStyle="black";
+			context.fillText("Check Highscores", 360,435,220);
 		}
 		else{
-			drawRoundRect(210,380,300,80,10);
+			drawBackground();
+			drawBoxes();
+			drawPhase();
+			drawText();
+			if(count%10>0 && count%10>5){
+				drawRoundRect(100,225,250,80,10);
+				context.fillStyle= "rgba(0, 153, 0, 0.7)";
+				context.fill();
+			}
+			drawRoundRect(370,225,250,80,10);
+			context.fillStyle= "rgba(153, 0, 0, 0.7)";
+			context.fill();
 		}
-		context.fillStyle="black";
-		context.fillText("Check Highscores", 360,435,220);
 	}
+
+	if(gamestate.Name=="transition"){
+		drawBackground();
+		drawBoxes();
+		drawPhase();
+		drawText();
+			drawRoundRect(100-10,225-10,250+20,80+20,10);
+			context.fillStyle= "rgba(0, 153, 0, 0.7)";
+			context.fill();
 	}
 
 	//the menu
@@ -227,28 +251,23 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 
 	//what question EG. 1/12
 	function drawPhase(){
-		context.font = "bold 35px 'Special Elite'";
+		context.font = "bold 30px 'Special Elite'";
 		context.fillStyle="white";
-		context.fillText(questionNumber+"/12",580,45);
+		context.fillText(questionNumber+"/12",580,55);
 	}
 
-	//encapsulates the time-left bar
-	function drawStatusBar(){
-		drawBar();
-		context.rect(60,15,360,30);
-	}
 
 	function drawBar(){
 		//time in seconds
 		var adjustedTime=timer/100;
 		//depending on the time left different color on bar
-		if(adjustedTime<90){ context.fillStyle="#00CC00";}
-		if((adjustedTime>90) && (adjustedTime<180)){ context.fillStyle="#66CC00";}
-		if((adjustedTime>180) && (adjustedTime<270)){ context.fillStyle="#CCCC00";}
-		if((adjustedTime>270) && (adjustedTime<360)){ context.fillStyle="#CC0000";}
+		if(adjustedTime<75){ context.fillStyle="#00CC00";}
+		if((adjustedTime>75) && (adjustedTime<150)){ context.fillStyle="#66CC00";}
+		if((adjustedTime>150) && (adjustedTime<225)){ context.fillStyle="#CCCC00";}
+		if((adjustedTime>225) && (adjustedTime<300)){ context.fillStyle="#CC0000";}
 		
 		if(adjustedTime<300){
-			context.fillRect(100,16,300-timer/100,28);
+			context.fillRect(100,30,300-timer/100,30);
 		}
 	}
 	//draws the backgroundImage

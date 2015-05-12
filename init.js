@@ -42,36 +42,7 @@ function initCanvas() {
 
 }
 
-function loadHighscores(){
 
-  var highscores=[];
-  var json = (function(){
-    var json = null;
-    $.ajax({
-      'async': false,
-      'global': false,
-      'url': "https://bonnevillehighscores.firebaseio.com/.json",
-      'dataType': "json",
-      'success': function (data) {
-        json = data;
-      }
-    });
-    for (i=0;i<10;i++){
-      highscores[i]=json.highscore[i];
-    }
-  })();
-
-  /* Tarvitaan myöhemmin, päivittää JSON
-  var myFirebaseRef = new Firebase("https://bonnevillehighscores.firebaseio.com/");
-  var highscoreRef = myFirebaseRef.child("highscore");
-  var myFirebaseRef = highscoreRef.child("1");
-    myFirebaseRef.update({
-    "name": "Olle"
-  });
-*/
-  
-  return highscores;
-}
 
 
 

@@ -3,7 +3,7 @@ function runGame(images,questions,highscores){
 	//reacts on mouseclicks
 	listenToMouse();
 	var currentquestion;
-	var questionIndex=1;
+	var questionIndex=0;
 	var timer= Date.now();
 	var delta;
 	var count=0;
@@ -25,23 +25,25 @@ function runGame(images,questions,highscores){
 		count++;
 		updateDelta();
 		currentquestion=questions[Math.min(questionIndex,11)];
-		/*if (timer > 30000) {
-			quitGame();
-		}*/
+
+		if (currentgamestate.Name=="transition" && delta>2000) {
+			currentgamestate.Name="game";
+			timer=Date.now();
+			questionIndex++;
+		}
 
 	}
 
 	function gameLoop(time) {
 		updateGameState();
-    	answerLocation=loadGraphics(delta,images,currentquestion,Math.min(questionIndex,12), currentgamestate,count,mousepos,highscores,points);
+    	answerLocation=loadGraphics(delta,images,currentquestion,Math.min(questionIndex+1,12), currentgamestate,count,mousepos,highscores,points);
     	requestAnimationFrame(gameLoop);
   	}
 
   	//asks for player name for highscores
   	function askforName(){
   		var person = prompt("Please enter your name", "");
-  		currentgamestate.Name=="highscores";
-  		console.log(currentgamestate.Name);
+  		handleHighscores(person,points,highscores);
   	}
 
   	function listenToMouse(){
@@ -59,9 +61,8 @@ function runGame(images,questions,highscores){
 			    if((pos.X>100 && pos.X<350) && (pos.Y>225 && pos.Y<305)){  // tarkista vastaus
 					if (answerLocation==1) {
 						points+=currentquestion.vaikeusaste;
-						questionIndex++;
+						currentgamestate.Name="transition";
 						timer=Date.now();
-						console.log(points);
 					}
 					else{
 						askforName();
@@ -73,11 +74,10 @@ function runGame(images,questions,highscores){
 				if((pos.X>370 && pos.X<620) && (pos.Y>225 && pos.Y<305)){
 					if (answerLocation==2) {
 						points+=currentquestion.vaikeusaste;
-						questionIndex++;
 						timer=Date.now();
 					}
 					else{
-						askforName();
+						//askforName();
 						currentgamestate.Name="loose";
 					}
 				}
@@ -85,7 +85,6 @@ function runGame(images,questions,highscores){
 				if((pos.X>100 && pos.X<350) && (pos.Y>360 && pos.Y<460)){
 					if (answerLocation==3) {
 						points+=currentquestion.vaikeusaste;
-						questionIndex++;
 						timer=Date.now();
 					}
 					else{
@@ -97,11 +96,10 @@ function runGame(images,questions,highscores){
 			    if((pos.X>370 && pos.X<620) && (pos.Y>360 && pos.Y<460)){
 					if (answerLocation==4) {
 						points+=currentquestion.vaikeusaste;
-						questionIndex++;
 						timer=Date.now();
 					}
 					else{
-						askforName();
+						//askforName();
 						currentgamestate.Name="loose";
 					}
 				}
@@ -146,6 +144,7 @@ function runGame(images,questions,highscores){
 			if(currentgamestate.Name=="loose"){
 				if((pos.X>210 && pos.X<510) && (pos.Y>380 && pos.Y<460)){
 					//Check highscores
+					askforName();
 					currentgamestate.Name="highscores";
 				}
 			}
