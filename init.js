@@ -56,7 +56,7 @@ function loadHighscores(){
         json = data;
       }
     });
-    for (i=0;i<3;i++){
+    for (i=0;i<10;i++){
       highscores[i]=json.highscore[i];
     }
   })();

@@ -14,6 +14,7 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 
 	//You loose screen
 	if(gamestate.Name=="loose"){
+		if(timer>3000){
 		context.drawImage(images[0], gamestate.count*500,0, 500,333, 0, 0, 720,480);
 		if(count%9==0){
 			gamestate.count=(gamestate.count+1)%4;
@@ -32,6 +33,7 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 		}
 		context.fillStyle="black";
 		context.fillText("Check Highscores", 360,435,220);
+	}
 	}
 
 	//the menu
@@ -81,8 +83,8 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 		context.fillText("Back to Menu", 360,435,220);
 		context.font="30px 'Special Elite'";
 		context.textAlign="start";
-		for(i=0; i<3; i++){
-			context.fillText(i+1+". "+highscores[i].name+": "+highscores[i].score, 220, 120+30*i, 300);
+		for(i=0; i<10; i++){
+			context.fillText(i+1+". "+highscores[i].name+": "+highscores[i].score, 220, 120+25*i, 300);
 		}
 	}
 
@@ -129,47 +131,79 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 		context.font = "bold 30px 'Electrolize'";
 		context.fillStyle="black";
 		context.textAlign="center";
-		context.fillText(question.Kysymys,360,150,580);
-		//randomilla kysymykset
-		context.fillText(question.A,205,300,260);
+		//var text=question.Kysymys;
+		CanvasText.drawText({
+			text: '<class="question">'+question.Kysymys+'</class>',
+			x:120,
+			y:120,
+			boxWidth: 500
+		});
+		//context.fillText(question.Kysymys,360,150,580);
+		
+		CanvasText.drawText({
+			text: '<class="answer">'+question.A+'</class>',
+			x: 110,
+			y: 260,
+			boxWidth: 240
+		});
+		CanvasText.drawText({
+			text: '<class="answer">'+question.B+'</class>',
+			x: 380,
+			y: 260,
+			boxWidth: 240
+		});
+		CanvasText.drawText({
+			text: '<class="answer">'+question.C+'</class>',
+			x: 110,
+			y: 360,
+			boxWidth: 240
+		});
+		CanvasText.drawText({
+			text: '<class="answer">'+question.D+'</class>',
+			x: 380,
+			y: 360,
+			boxWidth: 240
+		});
+
+		//context.fillText(question.A,205,300,260);
 		answerLocation=1;
 
-		context.fillText(question.B,515,300,260);
-		context.fillText(question.C,205,420,260);
-		context.fillText(question.D,515,420,260);
+		//context.fillText(question.B,515,300,260);
+		//context.fillText(question.C,205,420,260);
+		//context.fillText(question.D,515,420,260);
 	}
 	
 	function drawBoxes(){
 		//questionBox
-		drawRoundRect(60,60,600,160,10);
+		drawRoundRect(100,75,520,130,10);
 		drawAnswerboxes();
 	}
 
 	//draws the small boxes containing the answers
 	function drawAnswerboxes(){
-		if(checkmousepos(60,240,290,100)){
-			drawRoundRect(60-10,240-10,290+20,100+20,10);
+		if(checkmousepos(100,225,250,80)){
+			drawRoundRect(100-10,225-10,250+20,80+20,10);
 		}
 		else{
-			drawRoundRect(60,240,290,100,10);
+			drawRoundRect(100,225,250,80,10);
 		}
-		if(checkmousepos(370,240,290,100)){
-			drawRoundRect(370-10,240-10,290+20,100+20,10);
-		}
-		else{
-			drawRoundRect(370,240,290,100,10);
-		}
-		if(checkmousepos(60,360,290,100)){
-			drawRoundRect(60-10,360-10,290+20,100+20,10);
+		if(checkmousepos(370,225,250,80)){
+			drawRoundRect(370-10,225-10,250+20,80+20,10);
 		}
 		else{
-			drawRoundRect(60,360,290,100,10);
+			drawRoundRect(370,225,250,80,10);
 		}
-		if(checkmousepos(370,360,290,100)){
-			drawRoundRect(370-10,360-10,290+20,100+20,10);
+		if(checkmousepos(100,325,250,80)){
+			drawRoundRect(100-10,325-10,250+20,80+20,10);
 		}
 		else{
-			drawRoundRect(370,360,290,100,10);
+			drawRoundRect(100,325,250,80,10);
+		}
+		if(checkmousepos(370,325,250,80)){
+			drawRoundRect(370-10,325-10,250+20,80+20,10);
+		}
+		else{
+			drawRoundRect(370,325,250,80,10);
 		}
 	}
 
@@ -193,16 +227,15 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 
 	//what question EG. 1/12
 	function drawPhase(){
-		context.font = "bold 30px 'Electrolize'";
+		context.font = "bold 35px 'Special Elite'";
 		context.fillStyle="white";
-		context.fillText(questionNumber+"/12",610,40);
+		context.fillText(questionNumber+"/12",580,45);
 	}
 
 	//encapsulates the time-left bar
 	function drawStatusBar(){
 		drawBar();
 		context.rect(60,15,360,30);
-		//context.stroke();
 	}
 
 	function drawBar(){
@@ -214,14 +247,31 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 		if((adjustedTime>180) && (adjustedTime<270)){ context.fillStyle="#CCCC00";}
 		if((adjustedTime>270) && (adjustedTime<360)){ context.fillStyle="#CC0000";}
 		
-		if(adjustedTime<360){
-			context.fillRect(60,16,360-timer/100,28);
+		if(adjustedTime<300){
+			context.fillRect(100,16,300-timer/100,28);
 		}
 	}
 	//draws the backgroundImage
 	function drawBackground(){
 		context.drawImage(images[questionNumber],0,0,720,480);
 	}
+
+	//Some CanvasText classes defined
+	CanvasText.defineClass("question",{
+	    fontSize: "25px",
+	    fontColor: "#FF",
+	    fontFamily: "Special Elite",
+	    fontWeight: "bold",
+	});
+	CanvasText.defineClass("answer",{
+	    fontSize: "20px",
+	    fontColor: "#FF",
+	    fontFamily: "Special Elite",
+	    fontWeight: "bold",
+
+	});
+
+
 	return answerLocation;
 }
 

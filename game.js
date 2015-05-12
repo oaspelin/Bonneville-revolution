@@ -25,7 +25,7 @@ function runGame(images,questions,highscores){
 		count++;
 		updateDelta();
 		currentquestion=questions[Math.min(questionIndex,11)];
-	/*	if (timer > 30000) {
+		/*if (timer > 30000) {
 			quitGame();
 		}*/
 
@@ -37,6 +37,7 @@ function runGame(images,questions,highscores){
     	requestAnimationFrame(gameLoop);
   	}
 
+  	//asks for player name for highscores
   	function askforName(){
   		var person = prompt("Please enter your name", "");
   		currentgamestate.Name=="highscores";
@@ -53,9 +54,9 @@ function runGame(images,questions,highscores){
 		    var pos=getMousePos(e);
 
 		    //Game events
-		    //upper right box
+		    //upper left box
 		    if(currentgamestate.Name=="game"){
-			    if((pos.X>60 && pos.X<300) && (pos.Y>240 && pos.Y<340)){  // tarkista vastaus
+			    if((pos.X>100 && pos.X<350) && (pos.Y>225 && pos.Y<305)){  // tarkista vastaus
 					if (answerLocation==1) {
 						points+=currentquestion.vaikeusaste;
 						questionIndex++;
@@ -68,8 +69,8 @@ function runGame(images,questions,highscores){
 					}
 				}
 
-				//upper left
-				if((pos.X>370 && pos.X<540) && (pos.Y>240 && pos.Y<340)){
+				//upper right boc
+				if((pos.X>370 && pos.X<620) && (pos.Y>225 && pos.Y<305)){
 					if (answerLocation==2) {
 						points+=currentquestion.vaikeusaste;
 						questionIndex++;
@@ -80,20 +81,20 @@ function runGame(images,questions,highscores){
 						currentgamestate.Name="loose";
 					}
 				}
-				//down right
-				if((pos.X>60 && pos.X<300) && (pos.Y>360 && pos.Y<460)){
+				//down left
+				if((pos.X>100 && pos.X<350) && (pos.Y>360 && pos.Y<460)){
 					if (answerLocation==3) {
 						points+=currentquestion.vaikeusaste;
 						questionIndex++;
 						timer=Date.now();
 					}
 					else{
-						askforName();
+						//askforName();
 						currentgamestate.Name="loose";
 					}
 				}
-				//down left
-			    if((pos.X>370 && pos.X<540) && (pos.Y>360 && pos.Y<460)){
+				//down right
+			    if((pos.X>370 && pos.X<620) && (pos.Y>360 && pos.Y<460)){
 					if (answerLocation==4) {
 						points+=currentquestion.vaikeusaste;
 						questionIndex++;

@@ -6,7 +6,7 @@ var Question3 = {Kysymys:"Mikä on kautta aikain ollut Triumphin legendaarisin m
 
 var Question4 = {Kysymys:"Mikä on Bonneville Revolutionin maailmaa mullistavin uusi ominaisuus?", A:"Se osaa itse ajaa itseään", B:"Se osaa lentää.", C:"Se ei tarvitse polttoainetta.", D:"Se osaa puhua.", vaikeusaste:1, kuva: "images/bonneville_black.jpg"};
 
-var Question5 = {Kysymys:"Minkä avulla Bonneville Revolution tietää oman sijaintinsa?", A:"GPS-satelliitin avulla", B:"Kännykän avulla", C:"Internetin avulla", D:"Käyttäjän syöttämän tidon avulla", vaikeusaste:1, kuva: "images/nainen_kaarteessa.jpg"};
+var Question5 = {Kysymys:"Minkä avulla Bonneville Revolution tietää oman sijaintinsa?", A:"GPS-satelliitin avulla", B:"Kännykän avulla", C:"Internetin avulla", D:"Käyttäjän syöttämän tiedon avulla", vaikeusaste:1, kuva: "images/nainen_kaarteessa.jpg"};
 
 var Question6 = {Kysymys:"Triumphin ensimmäinen tehdas aloitti toimintansa vuonna 1887. Alkuperäinen tuote ei kuitenkaan ollut moottoripyörä, vaan", A:"Polkupyörä.", B:"Auto.", C:"Ompelukone.", D:"Höyryveturi.", vaikeusaste:2, kuva: "images/vintage_racer.jpg"};
 
