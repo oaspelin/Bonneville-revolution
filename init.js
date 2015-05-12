@@ -9,7 +9,6 @@ function initCanvas() {
 
   canvas = document.querySelector("canvas");
   context = canvas.getContext( "2d" );
-
   CanvasText = new CanvasText;
   CanvasText.config({
     canvas: canvas,
@@ -31,12 +30,10 @@ function initCanvas() {
   
   var questions=generateQuestions();
   var images=loadImages(questions);
+  var audio = new Audio('sounds/Bike.wav');
+  audio.play();
   highscores=loadHighscores();
 
-  //For highscores
-  //var person = prompt("Please enter your name", "");
-
-  
   //starts the game
   runGame(images,questions, highscores);
 

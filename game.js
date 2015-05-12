@@ -10,8 +10,11 @@ function runGame(images,questions,highscores){
 	var mousepos={X:0,Y:0};
 	var answerLocation;
 	var points=0;
+	var correctAudio= new Audio('sounds/Blopp.mp3');
+	var wrongAudio= new Audio('sounds/Buzz.wav');
 
-  	var currentgamestate={Name:"menu", count:0};
+
+  	var currentgamestate={Name:"menu", count1:0, count2:0};
 
 	//needed for the timer bar
 	function updateDelta() {
@@ -32,6 +35,9 @@ function runGame(images,questions,highscores){
 			questionIndex++;
 		}
 
+		if(currentgamestate.Name=="game" && delta>30000){
+			currentgamestate.Name="loose";
+		}
 	}
 
 	function gameLoop(time) {
@@ -44,6 +50,16 @@ function runGame(images,questions,highscores){
   	function askforName(){
   		var person = prompt("Please enter your name", "");
   		handleHighscores(person,points,highscores);
+  	}
+
+  	//if player looses, loads new questions and resets some variables
+  	function resetGame(){
+  		questionIndex=0;
+  		questions=generateQuestions();
+  		//different background image depending on the question, thats why images are loaded again
+  		images=loadImages(questions);
+  		points=0;
+  		timer=Date.now();
   	}
 
   	function listenToMouse(){
@@ -61,11 +77,17 @@ function runGame(images,questions,highscores){
 			    if((pos.X>100 && pos.X<350) && (pos.Y>225 && pos.Y<305)){  // tarkista vastaus
 					if (answerLocation==1) {
 						points+=currentquestion.vaikeusaste;
-						currentgamestate.Name="transition";
+						correctAudio.play();
+						if(questionIndex==11){
+							currentgamestate.Name="win";
+						}
+						else{
+							currentgamestate.Name="transition";
+						}
 						timer=Date.now();
 					}
 					else{
-						askforName();
+						wrongAudio.play(); 
 						currentgamestate.Name="loose";
 					}
 				}
@@ -74,10 +96,17 @@ function runGame(images,questions,highscores){
 				if((pos.X>370 && pos.X<620) && (pos.Y>225 && pos.Y<305)){
 					if (answerLocation==2) {
 						points+=currentquestion.vaikeusaste;
+						correctAudio.play();
+						if(questionIndex==11){
+							currentgamestate.Name="win";
+						}
+						else{
+							currentgamestate.Name="transition";
+						}
 						timer=Date.now();
 					}
 					else{
-						//askforName();
+						wrongAudio.play(); 
 						currentgamestate.Name="loose";
 					}
 				}
@@ -85,10 +114,17 @@ function runGame(images,questions,highscores){
 				if((pos.X>100 && pos.X<350) && (pos.Y>360 && pos.Y<460)){
 					if (answerLocation==3) {
 						points+=currentquestion.vaikeusaste;
+						correctAudio.play();
+						if(questionIndex==11){
+							currentgamestate.Name="win";
+						}
+						else{
+							currentgamestate.Name="transition";
+						}
 						timer=Date.now();
 					}
 					else{
-						//askforName();
+						wrongAudio.play(); 
 						currentgamestate.Name="loose";
 					}
 				}
@@ -96,10 +132,17 @@ function runGame(images,questions,highscores){
 			    if((pos.X>370 && pos.X<620) && (pos.Y>360 && pos.Y<460)){
 					if (answerLocation==4) {
 						points+=currentquestion.vaikeusaste;
+						correctAudio.play();
+						if(questionIndex==11){
+							currentgamestate.Name="win";
+						}
+						else{
+							currentgamestate.Name="transition";
+						}
 						timer=Date.now();
 					}
 					else{
-						//askforName();
+						wrongAudio.play(); 
 						currentgamestate.Name="loose";
 					}
 				}
@@ -141,11 +184,12 @@ function runGame(images,questions,highscores){
 			}
 
 			//Loose events
-			if(currentgamestate.Name=="loose"){
+			if(currentgamestate.Name=="loose" || currentgamestate.Name=="win"){
 				if((pos.X>210 && pos.X<510) && (pos.Y>380 && pos.Y<460)){
 					//Check highscores
 					askforName();
 					currentgamestate.Name="highscores";
+					resetGame();
 				}
 			}
 		});

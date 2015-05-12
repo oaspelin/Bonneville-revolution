@@ -6,24 +6,43 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 	clearCanvas();
 	if(gamestate.Name=="game"){
 		drawBackground();
-		drawBoxes();
+		drawQuestionBox();
+		drawresponsiveAnswerboxes();
 		drawBar();
 		drawPhase();
 		drawText();
 	}
 
+	function drawGif(){
+		/*context.drawImage(images[0], gamestate.count1*720, gamestate.count2*405, 718,405, 0, 0, 720,480);
+		if(count%5==0){
+				if(gamestate.count1==10){
+					gamestate.count2=(gamestate.count2+1)%18;
+				}
+				gamestate.count1=(gamestate.count1+1)%11;
+		}*/
+		context.drawImage(images[0], gamestate.count1*360, gamestate.count2*202.5,360,202.5, 0, 0, 720,480);
+		if(count%5==0){
+				if(gamestate.count1==10){
+					gamestate.count2=(gamestate.count2+1)%18;
+				}
+				gamestate.count1=(gamestate.count1+1)%11;
+		}
+	}
 	//You loose screen
-	if(gamestate.Name=="loose"){
+	if(gamestate.Name=="loose" || gamestate.Name=="win"){
 		if(timer>3000){
-			context.drawImage(images[0], gamestate.count*500,0, 500,333, 0, 0, 720,480);
-			if(count%9==0){
-				gamestate.count=(gamestate.count+1)%4;
-			}
+			drawGif();
 			context.font = "bold 70px 'Special Elite'";
 			context.textAlign="center";
-			context.fillText("Hävisit",360,210,550);
+			if(gamestate.Name=="loose"){
+				context.fillText("Hävisit",360,150,550);
+			}
+			else{
+				context.fillText("Vastasit oikein jokaiseen kysymykseen!",360,150,550);
+			}
 			context.font= "bold 50px 'Special Elite'";
-			context.fillText("Sait:"+points+" pistettä",360,300,550);
+			context.fillText("Sait: "+points+" pistettä",360,240,550);
 
 			if(checkmousepos(210,380,300,80)){
 				drawRoundRect(210-10,380-10,320,100,10);
@@ -31,12 +50,14 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 			else{
 				drawRoundRect(210,380,300,80,10);
 			}
+			
 			context.fillStyle="black";
 			context.fillText("Check Highscores", 360,435,220);
 		}
 		else{
 			drawBackground();
-			drawBoxes();
+			drawQuestionBox();
+			drawAnswerboxes();
 			drawPhase();
 			drawText();
 			if(count%10>0 && count%10>5){
@@ -50,23 +71,40 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 		}
 	}
 
+	if(gamestate.Name=="win"){
+		if(timer>3000){
+			drawGif();
+			context.font = "bold 70px 'Special Elite'";
+			context.textAlign="center";
+			context.fillText("Vastasit oikein jokaiseen kysymykseen!",360,150,550);
+			context.font= "bold 50px 'Special Elite'";
+			context.fillText("Sait: "+points+" pistettä",360,240,550);
+			if(checkmousepos(210,380,300,80)){
+				drawRoundRect(210-10,380-10,320,100,10);
+			}
+			else{
+				drawRoundRect(210,380,300,80,10);
+			}
+			context.fillStyle="black";
+			context.fillText("Check Highscores", 360,435,220);
+		}
+	}
+	//transition between slides
 	if(gamestate.Name=="transition"){
 		drawBackground();
-		drawBoxes();
+		drawQuestionBox();
+		drawAnswerboxes();
 		drawPhase();
 		drawText();
-			drawRoundRect(100-10,225-10,250+20,80+20,10);
-			context.fillStyle= "rgba(0, 153, 0, 0.7)";
+			drawRoundRect(100,225,250,80,10);
+			context.fillStyle= "rgba(0, 153, 0, 0.6)";
 			context.fill();
 	}
 
 	//the menu
 	if(gamestate.Name=="menu"){
-		context.drawImage(images[0], gamestate.count*500,0, 500,333, 0, 0, 720,480);
-		if(count%9==0){
-			gamestate.count=(gamestate.count+1)%4;
-		}
-		//Nämä pienempiä
+		drawGif();
+
 		for(i=0; i<3;i++){
 			if(checkmousepos(225,150+100*i,270,80)){
 				drawRoundRect(225-10,150+100*i-10,290,100,10);
@@ -86,13 +124,8 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 		context.fillText("Ennätykset", 360, 400,150);
 	}
 
-	//1. Pelle: 1000
-	//5 parhainta
 	if(gamestate.Name=="highscores"){
-		context.drawImage(images[0], gamestate.count*500,0, 500,333, 0, 0, 720,480);
-		if(count%9==0){
-			gamestate.count=(gamestate.count+1)%4;
-		}
+		drawGif();
 		drawRoundRect(160,80,400,280,10);
 		if(checkmousepos(210,380,300,80)){
 			drawRoundRect(210-10,380-10,320,100,10);
@@ -113,10 +146,7 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 	}
 
 	if(gamestate.Name=="instructions"){
-		context.drawImage(images[0], gamestate.count*500,0, 500,333, 0, 0, 720,480);
-		if(count%9==0){
-			gamestate.count=(gamestate.count+1)%4;
-		}
+		drawGif();
 		drawRoundRect(30,70,660,290,10);
 		if(checkmousepos(210,380,300,80)){
 			drawRoundRect(210-10,380-10,320,100,10);
@@ -150,20 +180,8 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
     	context.clearRect(0, 0, 720, 480); // clear canvas
   	}
 
-	//text to boxes
+	//text to answeboxes
 	function drawText(){
-		context.font = "bold 30px 'Electrolize'";
-		context.fillStyle="black";
-		context.textAlign="center";
-		//var text=question.Kysymys;
-		CanvasText.drawText({
-			text: '<class="question">'+question.Kysymys+'</class>',
-			x:120,
-			y:120,
-			boxWidth: 500
-		});
-		//context.fillText(question.Kysymys,360,150,580);
-		
 		CanvasText.drawText({
 			text: '<class="answer">'+question.A+'</class>',
 			x: 110,
@@ -188,23 +206,22 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 			y: 360,
 			boxWidth: 240
 		});
-
-		//context.fillText(question.A,205,300,260);
 		answerLocation=1;
-
-		//context.fillText(question.B,515,300,260);
-		//context.fillText(question.C,205,420,260);
-		//context.fillText(question.D,515,420,260);
 	}
 	
-	function drawBoxes(){
+	function drawQuestionBox(){
 		//questionBox
 		drawRoundRect(100,75,520,130,10);
-		drawAnswerboxes();
+		CanvasText.drawText({
+			text: '<class="question">'+question.Kysymys+'</class>',
+			x:120,
+			y:120,
+			boxWidth: 500
+		});
 	}
 
-	//draws the small boxes containing the answers
-	function drawAnswerboxes(){
+	//draws the small boxes containing the answers, makes them bigger if mouse is over a box
+	function drawresponsiveAnswerboxes(){
 		if(checkmousepos(100,225,250,80)){
 			drawRoundRect(100-10,225-10,250+20,80+20,10);
 		}
@@ -231,6 +248,15 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 		}
 	}
 
+	//draws the small boxes that doesn't react on mouseover
+	function drawAnswerboxes(){
+		drawRoundRect(100,225,250,80,10);
+		drawRoundRect(370,225,250,80,10);
+		drawRoundRect(100,325,250,80,10);
+		drawRoundRect(370,325,250,80,10);
+	}
+
+	//a rectangel with round corners
 	function drawRoundRect(x, y, width, height, cornerRadius){
 		context.beginPath();
 		context.moveTo(x+cornerRadius,y);
@@ -256,7 +282,7 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 		context.fillText(questionNumber+"/12",580,55);
 	}
 
-
+	//timebar
 	function drawBar(){
 		//time in seconds
 		var adjustedTime=timer/100;
@@ -270,6 +296,7 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 			context.fillRect(100,30,300-timer/100,30);
 		}
 	}
+
 	//draws the backgroundImage
 	function drawBackground(){
 		context.drawImage(images[questionNumber],0,0,720,480);
@@ -299,7 +326,7 @@ function loadImages(questions){
 	var images=[];
 
 	var gifImage= new Image();
-	gifImage.src= 'images/GIFtest.png';
+	gifImage.src= 'images/sprite_sheet2.png';
 	images.push(gifImage);
 
 	var backgroundImage1 = new Image();
