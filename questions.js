@@ -16,7 +16,7 @@ var Question8 = {Kysymys:"Montako ihmistä tarvitaan ajamaan Bonneville Revoluti
 
 var Question9 = {Kysymys:"Kuinka suuri moottori Bonneville Revolution moottoripyörässä on? ", A:"900cc", B:"800cc", C:"850cc", D:"1000cc", vaikeusaste:2, kuva: "images/engine.jpg"};
 
-var Question10 = {Kysymys:"Mihin nimi Bonneville juontaa juurensa?", A:"Se on tunnettu moottoripyöräkilpa-ajopaikka Yhdysvalloissa.", B:"Se on kylä Englannissa jossa Triumphin ensimmäiset moottoripyörät valmistettiin.", C:"Se tarkoittaa latinaksi nopeasti kulkevaa.", D:"Bonneville oli roomalainen myyttinen sotasankari", vaikeusaste: 2, kuva: "images/saltlake.jpg"};
+var Question10 = {Kysymys:"Mihin nimi Bonneville juontaa juurensa?", A:"Se on tunnettu moottoripyöräkilpa-ajopaikka Yhdysvalloissa.", B:"Se tarkoittaa ranskaksi gepardi", C:"Se tarkoittaa latinaksi nopeasti kulkevaa.", D:"Bonneville oli roomalainen myyttinen sotasankari", vaikeusaste: 2, kuva: "images/saltlake.jpg"};
 
 var Question11 = {Kysymys:"Mistä materiaalista Bonneville Revolutionin runko on valmistettu?", A:"Hiilikuidusta", B:"Titaanista", C:"Teräksestä", D:"Alumiinista", vaikeusaste:2, kuva: "images/bonneville1.jpg"};
 

@@ -50,7 +50,7 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 			else{
 				drawRoundRect(210,380,300,80,10);
 			}
-			
+
 			context.fillStyle="black";
 			context.fillText("Check Highscores", 360,435,220);
 		}
@@ -269,7 +269,7 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 		context.lineTo(x, y+cornerRadius);
 		context.arcTo(x, y, x+cornerRadius,y, cornerRadius);
 		//opacity
-		context.fillStyle= "rgba(255, 255, 255, 0.7)";
+		context.fillStyle= "rgba(255, 255, 255, 0.3)";
 		context.stroke();
 		context.fill();
 		context.closePath();	
