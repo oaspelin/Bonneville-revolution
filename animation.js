@@ -1,8 +1,8 @@
 
 //this function needs additional parameters when we progress EG. what question, also it should take as parameter an array of images
-function loadGraphics(timer,images,question,questionNumber, gamestate,count,mousepos,highscores,points) {
+function loadGraphics(timer,images,question,questionNumber, gamestate,count,mousepos,highscores,points, answerOrder,boxClicked) {
 	//calls the functions for rendering the game
-	var answerLocation;
+	var answerLocation=answerOrder[4];
 	clearCanvas();
 	if(gamestate.Name=="game"){
 		drawBackground();
@@ -55,34 +55,29 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 			drawPhase();
 			drawText();
 			if(count%10>0 && count%10>5){
-				drawRoundRect(100,225,250,80,10);
+				drawCertainRect("drawRoundRect"+answerLocation.toString());
 				context.fillStyle= "rgba(0, 153, 0, 0.7)";
 				context.fill();
 			}
-			drawRoundRect(370,225,250,80,10);
-			context.fillStyle= "rgba(153, 0, 0, 0.7)";
-			context.fill();
+
+			if(boxClicked!=answerLocation){
+				drawCertainRect("drawRoundRect"+boxClicked.toString());
+				context.fillStyle= "rgba(153, 0, 0, 0.7)";
+				context.fill();
+			}
 		}
 	}
 
-	if(gamestate.Name=="win"){
-		if(timer>3000){
-			drawGif();
-			context.font = "bold 70px 'Special Elite'";
-			context.textAlign="center";
-			context.fillText("Vastasit oikein jokaiseen kysymykseen!",360,150,550);
-			context.font= "bold 50px 'Special Elite'";
-			context.fillText("Sait: "+points+" pistettä",360,240,550);
-			if(checkmousepos(210,380,300,80)){
-				drawRoundRect(210-10,380-10,320,100,10);
-			}
-			else{
-				drawRoundRect(210,380,300,80,10);
-			}
-			context.fillStyle="black";
-			context.fillText("Ennätyksiin", 360,435,220);
+	function drawCertainRect(string){
+		switch(string){
+			case "drawRoundRect0": drawRoundRect0();break;
+			case "drawRoundRect1": drawRoundRect1();break;
+			case "drawRoundRect2": drawRoundRect2();break;
+			case "drawRoundRect3": drawRoundRect3();break;
 		}
 	}
+
+
 	//transition between slides
 	if(gamestate.Name=="transition"){
 		drawBackground();
@@ -90,9 +85,9 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 		drawAnswerboxes();
 		drawPhase();
 		drawText();
-			drawRoundRect(100,225,250,80,10);
-			context.fillStyle= "rgba(0, 153, 0, 0.6)";
-			context.fill();
+		drawCertainRect("drawRoundRect"+answerLocation.toString());
+		context.fillStyle= "rgba(0, 153, 0, 0.7)";
+		context.fill();
 	}
 
 	//the menu
@@ -161,6 +156,7 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 		});
 	}
 
+
 	function checkmousepos(x,y, width, height){
 		if((mousepos.X>x && mousepos.X< x+width) && (mousepos.Y>y && mousepos.Y< y+height)){
 			return true;
@@ -177,30 +173,29 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 	//text to answeboxes
 	function drawText(){
 		CanvasText.drawText({
-			text: '<class="answer">'+question.A+'</class>',
+			text: '<class="answer">'+answerOrder[0]+'</class>',
 			x: 110,
 			y: 260,
 			boxWidth: 240
 		});
 		CanvasText.drawText({
-			text: '<class="answer">'+question.B+'</class>',
+			text: '<class="answer">'+answerOrder[1]+'</class>',
 			x: 380,
 			y: 260,
 			boxWidth: 240
 		});
 		CanvasText.drawText({
-			text: '<class="answer">'+question.C+'</class>',
+			text: '<class="answer">'+answerOrder[2]+'</class>',
 			x: 110,
 			y: 360,
 			boxWidth: 240
 		});
 		CanvasText.drawText({
-			text: '<class="answer">'+question.D+'</class>',
+			text: '<class="answer">'+answerOrder[3]+'</class>',
 			x: 380,
 			y: 360,
 			boxWidth: 240
 		});
-		answerLocation=1;
 	}
 	
 	function drawQuestionBox(){
@@ -244,9 +239,22 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 
 	//draws the small boxes that doesn't react on mouseover
 	function drawAnswerboxes(){
+		drawRoundRect0();
+		drawRoundRect1();
+		drawRoundRect2();
+		drawRoundRect3();
+	}
+
+	function drawRoundRect0(){
 		drawRoundRect(100,225,250,80,10);
+	}
+	function drawRoundRect1(){
 		drawRoundRect(370,225,250,80,10);
+	}
+	function drawRoundRect2(){
 		drawRoundRect(100,325,250,80,10);
+	}
+	function drawRoundRect3(){
 		drawRoundRect(370,325,250,80,10);
 	}
 
@@ -313,9 +321,6 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 	    fontWeight: "bold",
 
 	});
-
-
-	return answerLocation;
 }
 
 //loads the images (only once)

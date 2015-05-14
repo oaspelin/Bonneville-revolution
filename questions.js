@@ -34,10 +34,11 @@ function getQuestions(){
 	var Questions=[Question1, Question2, Question3, Question4, Question5, Question6, Question7, Question8, Question9, Question10, Question11, Question12, Question13, Question14, Question15, Question16];
 	return Questions;
 }
+
 function generateQuestions(){
 	
 	var returnarray=getQuestions();
-	console.log(returnarray.length);
+
 	//removes one random easy question from the array
 	var random=getRandomNumber(0,3);
 	returnarray.splice(random,1);

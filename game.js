@@ -8,19 +8,23 @@ function runGame(images,questions,highscores){
 	var delta;
 	var count=0;
 	var mousepos={X:0,Y:0};
-	var answerLocation;
 	var points;
 	var correctAudio= new Audio('sounds/Blopp.mp3');
 	var wrongAudio= new Audio('sounds/Buzz.wav');
+	var answerOrder;
+	var boxClicked=0;
 
+	//game starts from menu
+	var currentgamestate={Name:"menu", count1:0, count2:0};
+
+	//some variables initiated that needs to be re-assigned during the game
 	function initvariables(){
 		questionIndex=0;
 		points=0;
+		//currentquestion=questions[Math.min(questionIndex,11)];
+		answerOrder=generateOrder();
 	}
-
-
-  	var currentgamestate={Name:"menu", count1:0, count2:0};
-
+  	
 	//needed for the timer bar
 	function updateDelta() {
     	var now = Date.now();
@@ -33,22 +37,23 @@ function runGame(images,questions,highscores){
 	function updateGameState(){
 		count++;
 		updateDelta();
-		currentquestion=questions[Math.min(questionIndex,11)];
 
 		if (currentgamestate.Name=="transition" && delta>2000) {
-			currentgamestate.Name="game";
-			timer=Date.now();
 			questionIndex++;
+			answerOrder=generateOrder();
+			currentgamestate.Name="game";
 		}
 
 		if(currentgamestate.Name=="game" && delta>30000){
 			currentgamestate.Name="loose";
 		}
+
+		currentquestion=questions[Math.min(questionIndex,11)];
 	}
 
 	function gameLoop(time) {
 		updateGameState();
-    	answerLocation=loadGraphics(delta,images,currentquestion,Math.min(questionIndex+1,12), currentgamestate,count,mousepos,highscores,points);
+    	loadGraphics(delta,images,currentquestion,Math.min(questionIndex+1,12), currentgamestate,count,mousepos,highscores,points,answerOrder,boxClicked);
     	requestAnimationFrame(gameLoop);
   	}
 
@@ -63,12 +68,27 @@ function runGame(images,questions,highscores){
 
   	//if player looses, loads new questions and resets some variables
   	function resetGame(){
-  		initvariables();
   		questions=generateQuestions();
+  		initvariables();
   		//different background image depending on the question, thats why images are loaded again
   		images=loadImages(questions);
   		timer=Date.now();
   	}
+
+  	//shuffels the question answers
+	function generateOrder(){
+		answers=null;
+		//array of the answers
+		var answers=[questions[questionIndex].A,
+					questions[questionIndex].B,
+					questions[questionIndex].C,
+					questions[questionIndex].D];		
+		//shuffels the array			
+		answers=shuffle(answers);
+		//pushes the index of the right answer to the end of the array
+		answers.push(answers.indexOf(questions[questionIndex].A));
+		return answers;		
+	}
 
   	function listenToMouse(){
   		document.addEventListener("mousemove",function(e){
@@ -82,8 +102,9 @@ function runGame(images,questions,highscores){
 		    //Game events
 		    //upper left box
 		    if(currentgamestate.Name=="game"){
-			    if((pos.X>100 && pos.X<350) && (pos.Y>225 && pos.Y<305)){  // tarkista vastaus
-					if (answerLocation==1) {
+			    if((pos.X>100 && pos.X<350) && (pos.Y>225 && pos.Y<305)){ 
+			    	console.log(answerOrder[4]); 
+					if (answerOrder[4]==0) {
 						points+=currentquestion.vaikeusaste;
 						correctAudio.play();
 						if(questionIndex==11){
@@ -92,17 +113,18 @@ function runGame(images,questions,highscores){
 						else{
 							currentgamestate.Name="transition";
 						}
-						timer=Date.now();
 					}
 					else{
+						boxClicked=0;
 						wrongAudio.play(); 
 						currentgamestate.Name="loose";
 					}
+					timer=Date.now();
 				}
 
 				//upper right boc
 				if((pos.X>370 && pos.X<620) && (pos.Y>225 && pos.Y<305)){
-					if (answerLocation==2) {
+					if (answerOrder[4]==1) {
 						points+=currentquestion.vaikeusaste;
 						correctAudio.play();
 						if(questionIndex==11){
@@ -111,16 +133,17 @@ function runGame(images,questions,highscores){
 						else{
 							currentgamestate.Name="transition";
 						}
-						timer=Date.now();
 					}
 					else{
-						//wrongAudio.play(); 
+						wrongAudio.play(); 
 						currentgamestate.Name="loose";
 					}
+					timer=Date.now();
+					boxClicked=1;
 				}
 				//down left
 				if((pos.X>100 && pos.X<350) && (pos.Y>360 && pos.Y<460)){
-					if (answerLocation==3) {
+					if (answerOrder[4]==2) {
 						points+=currentquestion.vaikeusaste;
 						correctAudio.play();
 						if(questionIndex==11){
@@ -129,16 +152,17 @@ function runGame(images,questions,highscores){
 						else{
 							currentgamestate.Name="transition";
 						}
-						timer=Date.now();
 					}
 					else{
 						wrongAudio.play(); 
 						currentgamestate.Name="loose";
 					}
+					timer=Date.now();
+					boxClicked=2;
 				}
 				//down right
 			    if((pos.X>370 && pos.X<620) && (pos.Y>360 && pos.Y<460)){
-					if (answerLocation==4) {
+					if (answerOrder[4]==3) {
 						points+=currentquestion.vaikeusaste;
 						correctAudio.play();
 						if(questionIndex==11){
@@ -147,12 +171,13 @@ function runGame(images,questions,highscores){
 						else{
 							currentgamestate.Name="transition";
 						}
-						timer=Date.now();
 					}
 					else{
 						wrongAudio.play(); 
 						currentgamestate.Name="loose";
 					}
+					timer=Date.now();
+					boxClicked=3;
 				}
 			}
 
