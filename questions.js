@@ -30,27 +30,63 @@ var Question15 = {Kysymys:"Mihin tekniikoihin perustuu Bonneville Revolutionin o
 
 var Question16 = {Kysymys:"Moni tunnettu supertähti esiintyi Triumphin mainoksissa 1950-luvulla. Kuka seuraavista henkilöistä ei ole esiintynyt Triumphin mainoksissa?", A:"Sean Connery", B:"Elvis Presley", C:"Steve McQueen", D:"James Dean", vaikeusaste:3, kuva: "images/hipster.jpg"};
 
-
-var Questions=[Question1, Question2, Question3, Question4, Question5, Question6, Question7, Question8, Question9, Question10, Question11, Question12, Question13, Question14, Question15, Question16];
-
+function getQuestions(){
+	var Questions=[Question1, Question2, Question3, Question4, Question5, Question6, Question7, Question8, Question9, Question10, Question11, Question12, Question13, Question14, Question15, Question16];
+	return Questions;
+}
 function generateQuestions(){
 	
-	var elementsremoved=0;
+	var returnarray=getQuestions();
+	console.log(returnarray.length);
 	//removes one random easy question from the array
-	var random=Math.round(Math.random()*(5-0)+0);
-	Questions.splice(random,1);
-	elementsremoved++;
-
+	var random=getRandomNumber(0,3);
+	returnarray.splice(random,1);
+	var elementsremoved=1;
+	
 	//removes two random moderate questions from the array
 	for(i=0; i<2;i++){
-		random=Math.round(Math.random()*((10-elementsremoved)-(5-elementsremoved))+(5-elementsremoved));
-		Questions.splice(random,1);
+		random=getRandomNumber(4,9-elementsremoved);
+		returnarray.splice(random,1);
 		elementsremoved++;
 	}
 
-	//removes one random hard quesstion from the array
-	random=Math.round(Math.random()*((15-elementsremoved)-(11-elementsremoved))+(11-elementsremoved));
-	Questions.splice(random,1);
 
-	return Questions;
+	//removes one random hard quesstion from the array
+	random=getRandomNumber(9,13);
+	returnarray.splice(random,1);
+
+	//shuffles the array
+	returnarray=shuffle(returnarray);
+
+	return returnarray;
 }
+
+//shuffles the array between two indexes (Fisher- Yates shuffle)
+function shuffle(array) {
+   
+    var counter = array.length, temp, index;
+
+    while (counter > 0) {
+        index = Math.floor(Math.random() * counter);
+        counter--;
+        temp = array[counter];
+        array[counter] = array[index];
+        array[index] = temp;
+    }
+
+    return array;
+}
+
+
+//returns random number between min and max
+function getRandomNumber(min,max){
+	return Math.round(Math.random() * (max - min)+min);
+}
+
+/*
+function addElements(array1,array2){
+	for(i=0;i<array2.length-1;i++){
+		array1.push(array2[i]);
+	}
+	return array1;
+}*/

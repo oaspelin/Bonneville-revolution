@@ -33,7 +33,6 @@ function handleHighscores(name, points,highscores){
 
   for(i=0; i<10;i++){
     var name=highscores[i].name;
-    console.log(name);
     var myFirebaseRef = highscoreRef.child(i);
       myFirebaseRef.update({
         "name": name,

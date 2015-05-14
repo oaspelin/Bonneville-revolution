@@ -3,15 +3,20 @@ function runGame(images,questions,highscores){
 	//reacts on mouseclicks
 	listenToMouse();
 	var currentquestion;
-	var questionIndex=0;
+	var questionIndex;
 	var timer= Date.now();
 	var delta;
 	var count=0;
 	var mousepos={X:0,Y:0};
 	var answerLocation;
-	var points=0;
+	var points;
 	var correctAudio= new Audio('sounds/Blopp.mp3');
 	var wrongAudio= new Audio('sounds/Buzz.wav');
+
+	function initvariables(){
+		questionIndex=0;
+		points=0;
+	}
 
 
   	var currentgamestate={Name:"menu", count1:0, count2:0};
@@ -22,6 +27,7 @@ function runGame(images,questions,highscores){
     	delta=now-timer;
   	}
 
+  	initvariables();
 	requestAnimationFrame(gameLoop);
 
 	function updateGameState(){
@@ -46,19 +52,21 @@ function runGame(images,questions,highscores){
     	requestAnimationFrame(gameLoop);
   	}
 
-  	//asks for player name for highscores
+  	//asks for player name for highscorescores
   	function askforName(){
   		var person = prompt("Please enter your name", "");
+  		if(person==null){
+  			person="Unknown biker";
+  		}
   		handleHighscores(person,points,highscores);
   	}
 
   	//if player looses, loads new questions and resets some variables
   	function resetGame(){
-  		questionIndex=0;
+  		initvariables();
   		questions=generateQuestions();
   		//different background image depending on the question, thats why images are loaded again
   		images=loadImages(questions);
-  		points=0;
   		timer=Date.now();
   	}
 
@@ -106,7 +114,7 @@ function runGame(images,questions,highscores){
 						timer=Date.now();
 					}
 					else{
-						wrongAudio.play(); 
+						//wrongAudio.play(); 
 						currentgamestate.Name="loose";
 					}
 				}
@@ -186,9 +194,9 @@ function runGame(images,questions,highscores){
 			//Loose events
 			if(currentgamestate.Name=="loose" || currentgamestate.Name=="win"){
 				if((pos.X>210 && pos.X<510) && (pos.Y>380 && pos.Y<460)){
+					currentgamestate.Name="highscores";
 					//Check highscores
 					askforName();
-					currentgamestate.Name="highscores";
 					resetGame();
 				}
 			}

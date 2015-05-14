@@ -14,14 +14,7 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 	}
 
 	function drawGif(){
-		/*context.drawImage(images[0], gamestate.count1*720, gamestate.count2*405, 718,405, 0, 0, 720,480);
-		if(count%5==0){
-				if(gamestate.count1==10){
-					gamestate.count2=(gamestate.count2+1)%18;
-				}
-				gamestate.count1=(gamestate.count1+1)%11;
-		}*/
-		context.drawImage(images[0], gamestate.count1*360, gamestate.count2*202.5,360,202.5, 0, 0, 720,480);
+		context.drawImage(images[0], gamestate.count1*576, gamestate.count2*324,576,324, 0, 0, 720,480);
 		if(count%5==0){
 				if(gamestate.count1==10){
 					gamestate.count2=(gamestate.count2+1)%18;
@@ -29,6 +22,7 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 				gamestate.count1=(gamestate.count1+1)%11;
 		}
 	}
+
 	//You loose screen
 	if(gamestate.Name=="loose" || gamestate.Name=="win"){
 		if(timer>3000){
@@ -52,7 +46,7 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 			}
 
 			context.fillStyle="black";
-			context.fillText("Check Highscores", 360,435,220);
+			context.fillText("Ennätyksiin", 360,435,220);
 		}
 		else{
 			drawBackground();
@@ -86,7 +80,7 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 				drawRoundRect(210,380,300,80,10);
 			}
 			context.fillStyle="black";
-			context.fillText("Check Highscores", 360,435,220);
+			context.fillText("Ennätyksiin", 360,435,220);
 		}
 	}
 	//transition between slides
@@ -118,10 +112,10 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 		context.textAlign="center";
 		context.fillText("Bonneville Revolution",360,70,550);
 		context.font = "bold 50px 'Special Elite";
-		context.fillText("Tietovisa",360, 120,350);
 		context.fillText("Pelaa", 360,200,150);
 		context.fillText("Ohjeet", 360,300 ,150);
 		context.fillText("Ennätykset", 360, 400,150);
+		context.fillText("Tietovisa",360, 120,350);
 	}
 
 	if(gamestate.Name=="highscores"){
@@ -136,8 +130,8 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 		context.font="bold 50px 'Special Elite'";
 		context.fillStyle="black";
 		context.textAlign="center";
-		context.fillText("Highscores",360,60,400);
-		context.fillText("Back to Menu", 360,435,220);
+		context.fillText("Ennätykset",360,60,400);
+		context.fillText("Takaisin valikkoon", 360,435,220);
 		context.font="30px 'Special Elite'";
 		context.textAlign="start";
 		for(i=0; i<10; i++){
@@ -158,7 +152,7 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 		context.fillStyle="black";
 		context.textAlign="center";
 		context.fillText("Ohjeet",360,60,400);
-		context.fillText("Back to Menu", 360,435,220);
+		context.fillText("Takaisin valikkoon", 360,435,220);
 		CanvasText.drawText({
 			text:"Tervetuloa osallistumaan Triumph Bonneville Revolution tietovisaan! Vastaamalla oikein kaikkiin kysymyksiinn, voit voittaa moottoripyöräsafarin Euroopassa. Safariin sisältyy vierailu Triumphin tehtailla. <br/> Kysymyksiä on kaksitoista kappaletta ja ne vaikenevat loppua kohti. Jokaiseen kysymykseen on neljä vastausvaihtoehtoa joista yksi on oikea, valitsemalla väärän vastauksen peli loppuu. Kysymyksiin pitää vastata 30 sekunnin kuluessa, ajan loputtua peli katkeaa.<br/>Vastattuanne oikein kaikkiin kysymyksiin oikein, keräämme yhteystietonne mahdollista palkintoa varten. Palkintoja arvotaan kymmenen kappaletta kaikkien oikein vastanneiden kesken. Peliin voivat osallistua ainoastaan valtuutetut Triumph-myyjät.               Onnea peliin!" ,
 			x: 40,
@@ -269,7 +263,8 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 		context.lineTo(x, y+cornerRadius);
 		context.arcTo(x, y, x+cornerRadius,y, cornerRadius);
 		//opacity
-		context.fillStyle= "rgba(255, 255, 255, 0.3)";
+		context.fillStyle= "rgba(255, 255, 255, 0.4)";
+		context.strokeStyle="black";
 		context.stroke();
 		context.fill();
 		context.closePath();	
@@ -279,6 +274,8 @@ function loadGraphics(timer,images,question,questionNumber, gamestate,count,mous
 	function drawPhase(){
 		context.font = "bold 30px 'Special Elite'";
 		context.fillStyle="white";
+		context.strokeStyle='black';
+		context.strokeText(questionNumber+"/12",580,55);
 		context.fillText(questionNumber+"/12",580,55);
 	}
 
@@ -326,7 +323,7 @@ function loadImages(questions){
 	var images=[];
 
 	var gifImage= new Image();
-	gifImage.src= 'images/sprite_sheet2.png';
+	gifImage.src= 'images/bonneville_sprite.png';
 	images.push(gifImage);
 
 	var backgroundImage1 = new Image();
