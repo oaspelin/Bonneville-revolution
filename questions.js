@@ -16,7 +16,7 @@ var Question8 = {Kysymys:"Montako ihmistä tarvitaan ajamaan Bonneville Revoluti
 
 var Question9 = {Kysymys:"Kuinka suuri moottori Bonneville Revolution moottoripyörässä on? ", A:"900cc", B:"800cc", C:"850cc", D:"1000cc", vaikeusaste:2, kuva: "images/engine.jpg"};
 
-var Question10 = {Kysymys:"Mihin nimi Bonneville juontaa juurensa?", A:"Se on tunnettu moottoripyöräkilpa-ajopaikka Yhdysvalloissa.", B:"Se tarkoittaa ranskaksi gepardi", C:"Se tarkoittaa latinaksi nopeasti kulkevaa.", D:"Bonneville oli roomalainen myyttinen sotasankari", vaikeusaste: 2, kuva: "images/saltlake.jpg"};
+var Question10 = {Kysymys:"Mihin nimi Bonneville juontaa juurensa?", A:"Se on tunnettu moottoripyöräkilpa- ajopaikka Yhdysvalloissa.", B:"Se tarkoittaa ranskaksi gepardi", C:"Se tarkoittaa latinaksi nopeasti kulkevaa.", D:"Bonneville oli roomalainen myyttinen sotasankari", vaikeusaste: 2, kuva: "images/saltlake.jpg"};
 
 var Question11 = {Kysymys:"Mistä materiaalista Bonneville Revolutionin runko on valmistettu?", A:"Hiilikuidusta", B:"Titaanista", C:"Teräksestä", D:"Alumiinista", vaikeusaste:2, kuva: "images/bonneville1.jpg"};
 
@@ -55,23 +55,26 @@ function generateQuestions(){
 	//removes one random hard quesstion from the array
 	random=getRandomNumber(9,13);
 	returnarray.splice(random,1);
-
+	
 	//shuffles the array
-	returnarray=shuffle(returnarray);
+	returnarray=shuffle(returnarray,0);
+	returnarray=shuffle(returnarray,4);
+	returnarray=shuffle(returnarray,8);
 
+	console.log(returnarray.length);
 	return returnarray;
 }
 
 //shuffles the array between two indexes (Fisher- Yates shuffle)
-function shuffle(array) {
-   
-    var counter = array.length, temp, index;
-
+function shuffle(array, min) {
+    //var counter = array.length, temp, index;
+    var counter=4;
+    var temp,index;
     while (counter > 0) {
-        index = Math.floor(Math.random() * counter);
+        index = Math.floor(Math.random() * counter)+min;
         counter--;
-        temp = array[counter];
-        array[counter] = array[index];
+        temp = array[counter+min];
+        array[counter+min] = array[index];
         array[index] = temp;
     }
 

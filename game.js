@@ -84,7 +84,7 @@ function runGame(images,questions,highscores){
 					questions[questionIndex].C,
 					questions[questionIndex].D];		
 		//shuffels the array			
-		answers=shuffle(answers);
+		answers=shuffle(answers,0);
 		//pushes the index of the right answer to the end of the array
 		answers.push(answers.indexOf(questions[questionIndex].A));
 		return answers;		
@@ -103,7 +103,6 @@ function runGame(images,questions,highscores){
 		    //upper left box
 		    if(currentgamestate.Name=="game"){
 			    if((pos.X>100 && pos.X<350) && (pos.Y>225 && pos.Y<305)){ 
-			    	console.log(answerOrder[4]); 
 					if (answerOrder[4]==0) {
 						points+=currentquestion.vaikeusaste;
 						correctAudio.play();

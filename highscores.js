@@ -1,5 +1,4 @@
 function loadHighscores(){
-
   var highscores=[];
   var json = (function(){
     var json = null;
@@ -16,7 +15,6 @@ function loadHighscores(){
       highscores[i]=json.highscore[i];
     }
   })();
-  
   return highscores;
 }
 
