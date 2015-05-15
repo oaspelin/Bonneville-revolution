@@ -61,7 +61,6 @@ function generateQuestions(){
 	returnarray=shuffle(returnarray,4);
 	returnarray=shuffle(returnarray,8);
 
-	console.log(returnarray.length);
 	return returnarray;
 }
 
@@ -80,7 +79,19 @@ function shuffle(array, min) {
 
     return array;
 }
+//shuffles the array between two indexes (Fisher- Yates shuffle)
+function shuffle(array) {
+  	var counter = array.length, temp, index;
+    while (counter > 0) {
+        index = Math.floor(Math.random() * counter);
+        counter--;
+        temp = array[counter];
+        array[counter] = array[index];
+        array[index] = temp;
+    }
 
+    return array;
+}
 
 //returns random number between min and max
 function getRandomNumber(min,max){

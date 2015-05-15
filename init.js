@@ -30,10 +30,9 @@ function initCanvas() {
   //initiates the game
   var questions=generateQuestions();
   var images=loadImages(questions);
-  var audio = new Audio('sounds/Bike.wav');
   var highscores=loadHighscores();
 
-  audio.play();
+  //starts the game
   runGame(images,questions, highscores);
 
 }

@@ -1,5 +1,9 @@
 function runGame(images,questions,highscores){
 
+	//audio when started
+	var audio = new Audio('sounds/Bike.wav');
+	audio.play();
+	
 	//reacts on mouseclicks
 	listenToMouse();
 	var currentquestion;
@@ -84,7 +88,7 @@ function runGame(images,questions,highscores){
 					questions[questionIndex].C,
 					questions[questionIndex].D];		
 		//shuffels the array			
-		answers=shuffle(answers,0);
+		answers=shuffle(answers);
 		//pushes the index of the right answer to the end of the array
 		answers.push(answers.indexOf(questions[questionIndex].A));
 		return answers;		
